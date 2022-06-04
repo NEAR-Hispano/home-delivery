@@ -4,7 +4,7 @@ It is a dapp designed to generate an ecosystem based on food delivery jobs and s
 # install dependencies
 $ npm install
 
-# serve with hot reload at localhost:8000
+# serve with hot reload at localhost:8080
 $ npm run dev
 
 # build for production and launch server

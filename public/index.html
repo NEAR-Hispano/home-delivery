@@ -29,6 +29,7 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB8dExdQtd6WILpKT57uF2boPp8VyCIufk=initMap&v=weekly"></script> -->
   </body>
 </html>
 
@@ -36,35 +37,19 @@
 /*
 default settings
 */
-*::-webkit-scrollbar {
-  width: 10px;
-  background: var(--clr-card-scroll);
-}
-*::-webkit-scrollbar-thumb {
-  background: var(--clr-scroll);
-}
 :is(html, body) {
   font-size: 16px;
   scroll-behavior: smooth;
   background-color: var(--bg) !important;
+  scroll-padding-top: 2em;
 }
-:is(#app, #layout, #error, #login) {
-  font-family: 'Open Sans', sans-serif;
-}
-a {
-  text-decoration: none;
-}
-::selection {
-  background-color: #ffac40;
-}
+:is(#app, #layout, #error, #login) {font-family: var(--font1)}
 /*
 delete-config-default-vuetify
 */
-/* .v-overlay__scrim:not(.notdefault-vuetify) {
-  background: transparent !important;
-} */
-/* list */
-:is(.v-list, .v-sheet, .theme--light):not(.notdefault-vuetify, .notdefault) {
-  box-shadow: none !important;
-}
+:is(.v-list, .v-sheet, .theme--light, .v-dialog) {box-shadow: none !important}
+.v-card:is([class*="div"], [class*="space"]) {display: flex !important}
+.v-card:is([class*="grid"]) {display: grid !important}
+.v-card::before {background: transparent !important}
+/* .v-overlay__scrim {background: transparent !important} */
 </style>

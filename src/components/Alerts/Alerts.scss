@@ -1,4 +1,4 @@
-@import "@/styles/app";
+@use "@/styles/app" as *;
 
 // alerts
 #alerts {
@@ -11,17 +11,13 @@
     animation: moveright .5s $ease-return;
     .alert-content {
       gap: 0.2em;
-      span {
-        color: #FFFFFF !important;
-      }
+      span {color: #FFFFFF !important}
     }
     .v-btn {
       span {
         color: $clr-label;
         transition: 0.5s $ease;
-        &:hover {
-          color: red !important;
-        }
+        &:hover {color: red !important}
       }
     }
   }

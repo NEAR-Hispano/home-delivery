@@ -29,40 +29,40 @@
 .clr {
   color: var(--clr) !important;
 }
-.clr-inv {
+.clr_inv {
   color: var(--clr-inv) !important;
 }
-.clr-card {
+.clr_card {
   background-color: var(--clr-card) !important;
 }
-.clr-card-inv {
+.clr_card_inv {
   background-color: var(--clr-card-inv) !important;
 }
 .filter {
   filter: invert(0%) !important;
 }
-.filter-inv {
+.filter_inv {
   filter: invert(100%) !important;
 }
-.clr-svg {
+.clr_svg {
   fill: var(--clr) !important;
 }
-.clr-svg-inv {
+.clr_svg_inv {
   fill: var(--clr-inv) !important;
 }
-.clr-card-2 {
+.clr_card-2 {
   background-color: var(--clr-card-2) !important;
 }
-.clr-btn {
+.clr_btn {
   background-color: var(--clr-btn) !important;
 }
-.clr-text-btn {
+.clr_text_btn {
   color: var(--clr-text-btn) !important;
 }
-.clr-btn-inv {
+.clr_btn_inv {
   background-color: var(--clr-btn-inv) !important;
 }
-.clr-text-btn-inv {
+.clr_text_btn-inv {
   color: var(--clr-text-btn-inv) !important;
 }
 

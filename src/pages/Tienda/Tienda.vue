@@ -16,7 +16,7 @@
     <v-col class="contdown">
       <aside class="wrapper divcol">
         <div class="center">
-          <h2 class="h3-em">Menú</h2>
+          <h2 class="h6_em">Menú</h2>
 
           <v-tooltip right color="var(--clr-btn)">
             <template v-slot:activator="{ on, attrs }">
@@ -28,17 +28,17 @@
           </v-tooltip>
         </div>
 
-        <v-col class="divcol gap">
+        <v-col class="divcol gap2">
           <v-card v-for="(item,i) in dataMenuTienda" :key="i"
             style="display:flex" class="acenter">
             <aside class="divrow">
               <img src="@/assets/icons/inicio.png" alt="Menu Image">
 
               <div class="contInfo divcol jcenter">
-                <label class="h4-em">{{ item.nombre }}</label>
+                <label class="h7_em">{{ item.nombre }}</label>
                 <div class="space">
-                  <span class="h6-em semibold">{{ item.categoria }}</span>
-                  <span class="h6-em semibol">{{ item.precio }}$</span>
+                  <span class="h9_em semibold">{{ item.categoria }}</span>
+                  <span class="h9_em semibol">{{ item.precio }}$</span>
                 </div>
               </div>
             </aside>
@@ -55,7 +55,7 @@ import { CONFIG } from '@/services/api'
 const { connect, keyStores, WalletConnection, Contract } = nearAPI
 
 export default {
-  name: "Tienda",
+  name: "tienda",
   data() {
     return {
       data: {},
@@ -94,7 +94,6 @@ export default {
     }
   },
   mounted() {
-    this.$parent.$parent.$parent.$refs.navbar.to('tienda')
     this.VerifyStore()
   },
   methods: {

@@ -35,6 +35,8 @@ module.exports = {
   ROUTES: `${BASE_URL}/menu-get`,
   PERFIL: `${BASE_URL}/verificar-perfil`,
   PROFILE: `${BASE_URL}/perfiles/`,
+  MESSAGES: `${BASE_URL}/mensajes/`,
+  CHATS: `${BASE_URL}/chats/`,
   IPFS: `${NODE_URL}/ipfs`,
   GOODS: `${BASE_URL}/goods`,
   GOODS_COLUMNS: `${BASE_URL}/columns`,

@@ -1,0 +1,24 @@
+@use "@/styles/app" as *;
+
+//////////////////////////////////////////////////////////////////////
+// // // menuForms // // //
+//////////////////////////////////////////////////////////////////////
+.verificatorMiPerfil {
+  background-color: var(--clr-alerta) !important;
+  box-shadow: none !important;
+  clip-path: $clip-path;
+  border-radius: 28px;
+  padding: clamp(0.7em, 2vw, 1em) !important;
+  h6 {
+    color: $clr-label;
+    font-weight: 700 !important;
+  }
+  .v-btn {
+    min-width: max-content;
+    min-height: max-content;
+    border-radius: 20px;
+    img {
+      width: 1.5em;
+    }
+  }
+}

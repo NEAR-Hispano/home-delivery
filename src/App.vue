@@ -9,7 +9,7 @@
   const { connect, keyStores, WalletConnection } = nearAPI;
 
   export default {
-    name: 'App',
+    name: 'app',
     data(){
       return {
         user: null,
@@ -39,17 +39,17 @@
         this.axios.post(PERFIL,{'wallet':user}).then((response) => {
           if (response.data.id) {
             if (response.data.vendedor) {
-              this.$router.addRoute('Layout', { path: '/tienda', name: 'Tienda', component: () => import('@/pages/Tienda/Tienda') })
-              this.$router.addRoute('Layout', { path: '/mi-tienda', name: 'MiTienda', component: () => import('@/components/Forms/Tienda') })
+              this.$router.addRoute('layout', { path: '/tienda', name: 'tienda', component: () => import('@/pages/tienda/Tienda') })
+              this.$router.addRoute('layout', { path: '/mi-tienda', name: 'miTienda', component: () => import('@/components/forms/miTienda/MiTienda') })
             }
             if (response.data.delivery) {
-              this.$router.addRoute('Layout', { path: '/delivery', name: 'Delivery', component: '' })
+              this.$router.addRoute('pedido', { path: '/pedido', name: 'pedido', component: () => import('@/pages/pedido/Pedido'), })
             }
             // Set profile.id as localStorage item
             localStorage.setItem('profileid',response.data.id)
           } else {
-            if (this.$route.name !== 'MiPerfil') {
-              this.$router.push({name: 'MiPerfil'})
+            if (this.$route.name !== 'perfil') {
+              this.$router.push({name: 'perfil'})
             }
           }
         }).catch((e) => {

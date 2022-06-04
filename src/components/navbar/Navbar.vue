@@ -6,6 +6,7 @@
     </a>
     <!-- content -->
     <aside class="contnavbar divcol divrowmobile spacea align">
+      <div class="slideSquare" />
       <template v-for="(item, index) in dataNavbar">
         <a v-if="item.mostrar" :key="index" @click="to(item)"
           class="conticon center" :class="{ conticonActive: item.active }">

@@ -7,20 +7,14 @@
   font-size: 16px;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  @include fixed(0,0,auto,0);
   width: 15%;
   height: 100%;
   padding-block: clamp(2em, 3vh, 3em);
   box-shadow: $sombra-card;
-  // gap: clamp(0em, 1.5vh, 2em);
   .contlogo {
     width: min(90%, 10em);
-    .logo {
-      width: 100%;
-    }
+    .logo {width: 100%}
   }
   .contnavbar {
     height: 80%;
@@ -32,18 +26,9 @@
       border: 2px solid var(--clr-btn);
       border-radius: var(--border-responsive);
       @include animation(.8s $ease-return .2s) {
-        0% {
-          transform: scale(1);
-          opacity: 100%;
-        }
-        50% {
-          transform: scale(1.1);
-          opacity: 50%;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 100%;
-        }
+        0% {transform: scale(1);opacity: 100%}
+        50% {transform: scale(1.1);opacity: 50%}
+        100% {transform: scale(1);opacity: 100%}
       }
     }
     .conticon:not(.conticonActive):hover:after {
@@ -54,31 +39,23 @@
       border: 2px solid var(--clr-btn);
       border-radius: var(--border-responsive);
       @include animation(.5s $ease-return .1s) {
-        0% {
-          transform: scale(1);
-          opacity: 100%;
-        }
-        50% {
-          transform: scale(1.05);
-          opacity: 50%;
-        }
-        100% {
-          transform: scale(1);
-          opacity: 100%;
-        }
+        0% {transform: scale(1);opacity: 100%}
+        50% {transform: scale(1.05);opacity: 50%}
+        100% {transform: scale(1);opacity: 100%}
       }
     }
     .conticon {
+      --size: clamp(3em, 10vw, 6.3em);
       position: relative;
-      width: clamp(3em, 10vw, 6.3em);
-      height: clamp(3em, 10vw, 6.3em);
+      width: var(--size);
+      height: var(--size);
       border-radius: var(--border-responsive);
+      perspective: 500px;
       transition: 0.5s ease;
       :is(img, span) {
         font-weight: 500;
         font-size: $font-size-navbar;
-        -webkit-text-stroke: 0.4px var(--clr);
-        -moz-text-stroke: 0.4px var(--clr);
+        @include stroke(0.4px var(--clr));
       }
       img {
         width: clamp(2em, 10vw, 3.7em);
@@ -86,12 +63,20 @@
         transition: 0.5s ease-in-out;
       }
     }
-    .conticonActive {
+    .conticonActive:before {
+      content: "";
+      @include absoluteCenter;
+      width: 100%;
+      height: 100%;
       background: $clr-text-btn;
+      border-radius: var(--border-responsive);
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       transition: 0.2s ease-in-out;
-      span {
-        color: var(--clr) !important;
+      z-index: -1;
+      span {color: var(--clr) !important}
+      @include animation(.2s $ease-return) {
+        0% {transform: translateZ(-100px)}
+        100% {transform: translateZ(0px)}
       }
     }
   }

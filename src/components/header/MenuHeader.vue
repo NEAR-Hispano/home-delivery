@@ -17,7 +17,7 @@
         class="searchMobile"
       >
       <template v-slot:prepend-inner>
-        <img src="@/assets/icons/lupa.png" alt="icon">
+        <img src="@/assets/icons/lupa.svg" alt="icon">
       </template>
 
         <template v-slot:label>

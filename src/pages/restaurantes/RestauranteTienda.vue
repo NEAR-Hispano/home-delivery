@@ -118,7 +118,7 @@
 
             <div class="contPrice divcol tend">
               <div class="acenter">
-                <img class="logoNear" src="@/assets/logos/near.png" alt="near">
+                <img class="logoNear" src="@/assets/logos/near.svg" alt="near">
                 <span class="price normal">{{item.near}}</span>
               </div>
               <span class="not_clr">(${{item.dollar}})</span>

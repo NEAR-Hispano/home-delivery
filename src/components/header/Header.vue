@@ -17,7 +17,7 @@
               class="eliminarmobile"
             >
             <template v-slot:prepend-inner>
-              <img src="@/assets/icons/lupa.png" alt="icon">
+              <img src="@/assets/icons/lupa.svg" alt="icon">
             </template>
 
               <template v-slot:label>
@@ -26,12 +26,12 @@
             </v-text-field>
 
             <v-btn class="botones openOptions">
-              <img width="100%" src="@/assets/icons/options.png" alt="options">
+              <img width="100%" src="@/assets/icons/options.svg" alt="options">
             </v-btn>
 
             <v-btn
               class="botones vermobile openSearch">
-              <img src="@/assets/icons/lupa.png" alt="icon">
+              <img src="@/assets/icons/lupa.svg" alt="icon">
             </v-btn>
           </aside>
 
@@ -49,7 +49,7 @@
                 :value="messages"
                 color="#3E2185"
               >
-                <img width="100%" src="@/assets/icons/cart.png" alt="shopping cart">
+                <img width="100%" src="@/assets/icons/cart.svg" alt="shopping cart">
               </v-badge>
             </v-btn>
           </aside>

@@ -1,12 +1,12 @@
 <template>
   <section id="tienda" class="parent">
     <v-col class="contup astart">
-      <img src="@/assets/images/tienda-title.png" alt="Titulo tienda">
+      <img src="@/assets/images/tienda-title.svg" alt="Titulo tienda">
 
       <v-tooltip right color="var(--clr-btn)">
         <template v-slot:activator="{ on, attrs }">
           <v-btn class="add" icon v-bind="attrs" v-on="on" href="#/mi-tienda">
-            <img src="@/assets/icons/pencil.png" alt="Add Menu">
+            <img src="@/assets/icons/pencil.svg" alt="Add Menu">
           </v-btn>
         </template>
         <span class="clr-text-btn">Editar datos de tienda</span>
@@ -21,7 +21,7 @@
           <v-tooltip right color="var(--clr-btn)">
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="add" icon v-bind="attrs" v-on="on" href="#/mi-menu">
-                <img src="@/assets/icons/plus.png" alt="add menu">
+                <img src="@/assets/icons/plus.svg" alt="add menu">
               </v-btn>
             </template>
             <span class="clr-text-btn">Agregar nuevo menú</span>
@@ -32,7 +32,7 @@
           <v-card v-for="(item,i) in dataMenuTienda" :key="i"
             style="display:flex" class="acenter">
             <aside class="divrow">
-              <img src="@/assets/icons/inicio.png" alt="Menu Image">
+              <img src="@/assets/icons/inicio.svg" alt="Menu Image">
 
               <div class="contInfo divcol jcenter">
                 <label class="h7_em">{{ item.nombre }}</label>

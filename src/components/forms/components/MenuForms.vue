@@ -14,10 +14,10 @@
         <h6 class="h11_em">{{ $t(item.key) }}</h6>
         <div class="spacea">
           <v-btn color="var(--clr-card-2)" @click="AcceptVerificator(item.key)">
-            <img src="@/assets/icons/check.png" alt="accept button">
+            <img src="@/assets/icons/check.svg" alt="accept button">
           </v-btn>
           <v-btn color="var(--clr-card-2)" @click="CancelVerificator(item.key)">
-            <img src="@/assets/icons/cancel.png" alt="cancel button">
+            <img src="@/assets/icons/cancel.svg" alt="cancel button">
           </v-btn>
         </div>
       </v-col>

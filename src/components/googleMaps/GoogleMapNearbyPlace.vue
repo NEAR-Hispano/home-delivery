@@ -34,7 +34,7 @@
         :offsetY="17.5"
         @click.native="someFunction()"
       >
-        <img class="localImg" src="@/assets/logos/logo.png" />
+        <img class="localImg" src="@/assets/logos/logo.svg" />
       </gmap-custom-marker>
     </GmapMap>
   </section>

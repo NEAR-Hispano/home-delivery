@@ -2,7 +2,7 @@
   <v-row id="navbar" class="alignmobile">
     <!-- logo -->
     <a href="#" class="contlogo align eliminarmobile">
-      <img class="logo" src="@/assets/logos/logo.png" alt="Logo" @click="to('inicio')">
+      <img class="logo" src="@/assets/logos/logo.svg" alt="Logo" @click="to('inicio')">
     </a>
     <!-- content -->
     <aside class="contnavbar divcol divrowmobile spacea align">
@@ -21,14 +21,14 @@
 
 <script>
 import { PERFIL,PROFILE } from '@/services/api.js'
-const icon1 = require("@/assets/icons/inicio-outline.png");
-const icon1Active = require("@/assets/icons/inicio.png");
-const icon2 = require("@/assets/icons/restaurantes-outline.png");
-const icon2Active = require("@/assets/icons/restaurantes.png");
-const icon3 = require("@/assets/icons/tienda-outline.png");
-const icon3Active = require("@/assets/icons/tienda.png");
-const icon4 = require("@/assets/icons/delivery-outline.png");
-const icon4Active = require("@/assets/icons/delivery.png");
+const icon1 = require("@/assets/icons/inicio-outline.svg");
+const icon1Active = require("@/assets/icons/inicio.svg");
+const icon2 = require("@/assets/icons/restaurantes-outline.svg");
+const icon2Active = require("@/assets/icons/restaurantes.svg");
+const icon3 = require("@/assets/icons/tienda-outline.svg");
+const icon3Active = require("@/assets/icons/tienda.svg");
+const icon4 = require("@/assets/icons/delivery-outline.svg");
+const icon4Active = require("@/assets/icons/delivery.svg");
 
 export default {
   name: "navbar",

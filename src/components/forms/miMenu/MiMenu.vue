@@ -101,7 +101,7 @@
             <v-tooltip bottom color="var(--clr-btn)">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="add" icon v-bind="attrs" v-on="on">
-                  <img src="@/assets/icons/pencil.png" alt="Add Menu" />
+                  <img src="@/assets/icons/pencil.svg" alt="Add Menu" />
                 </v-btn>
               </template>
               <span class="clr-text-btn">Editar</span>
@@ -110,7 +110,7 @@
             <v-tooltip bottom color="#ff4081">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn icon v-bind="attrs" v-on="on">
-                  <img src="@/assets/icons/eliminar.png" alt="Add Menu" />
+                  <img src="@/assets/icons/eliminar.svg" alt="Add Menu" />
                 </v-btn>
               </template>
               <span style="color: #ffffff !important">Eliminar</span>
@@ -145,14 +145,14 @@ export default {
       foto: false,
       dataSlideMenu: [
         {
-          img: require("@/assets/icons/inicio.png"),
+          img: require("@/assets/icons/inicio.svg"),
           nombre: "LUMPIAS CON QUESO",
           categoria: "CHINO",
           precio: "1000",
           desc: "rico platillo para toda la familia pues",
         },
         {
-          img: require("@/assets/icons/inicio.png"),
+          img: require("@/assets/icons/inicio.svg"),
           nombre: "HAMBURGUESAS TIRPLE CARNE",
           categoria: "FRITURA",
           precio: "1000",

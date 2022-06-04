@@ -118,7 +118,7 @@ export default {
       sliderRestaurant: [
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -126,7 +126,7 @@ export default {
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "Nodoo",
           desc: "Asiático // Ramen",
@@ -134,7 +134,7 @@ export default {
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La casa de Lola",
           desc: "Comida Mediterránea",
@@ -142,7 +142,7 @@ export default {
         },
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -150,7 +150,7 @@ export default {
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -158,7 +158,7 @@ export default {
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -166,7 +166,7 @@ export default {
         },
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -174,7 +174,7 @@ export default {
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -182,7 +182,7 @@ export default {
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.png"),
+          icon: require("@/assets/icons/corazon-outline.svg"),
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
@@ -207,8 +207,8 @@ export default {
     },
     SelectLikeRestaurant(item) {
       item.like = !item.like
-      if (item.like == true) {item.icon = require("@/assets/icons/corazon.png")}
-      else {item.icon = require("@/assets/icons/corazon-outline.png")}
+      if (item.like == true) {item.icon = require("@/assets/icons/corazon.svg")}
+      else {item.icon = require("@/assets/icons/corazon-outline.svg")}
     }
   },
 };

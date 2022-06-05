@@ -195,7 +195,7 @@ export default {
       this.logout = false;
       if (this.$route.name !== 'inicio') {
         localStorage.removeItem('store')
-        this.$parent.$parent.to('inicio');
+        this.$parent.$parent.$parent.$parent.$refs.navbar.to('inicio');
       }
     },
   },

@@ -5558,7 +5558,7 @@
     "object-visit" "^1.0.0"
 
 "marker-clusterer-plus@^2.1.4":
-  "integrity" "sha1-+O/3TVmdqzt9Dj/tUmTqDnBPXWc="
+  "integrity" "sha512-4WLZnYCkgsUfSC0pftldd0YrLNupSqVIEdxL979f3sXVMBHTUOF3gDa6cEuOk2z8UGyVGcANiNZgvVc333mrHA=="
   "resolved" "https://registry.npmjs.org/marker-clusterer-plus/-/marker-clusterer-plus-2.1.4.tgz"
   "version" "2.1.4"
 

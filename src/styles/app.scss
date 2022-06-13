@@ -132,6 +132,8 @@ p:not(.not_typography, .not) {
     :is(.v-input__slot, .v-text-field__slot) {
       padding: 0 !important;
       height: 100% !important;
+      border-radius: 28px !important;
+      overflow: hidden;
       cursor: default;
     }
     .v-text-field__slot {cursor: pointer !important}
@@ -242,6 +244,19 @@ p:not(.not_typography, .not) {
     font-size: $font-size-header;
   }
 }
+.botones2 {
+  background: var(--clr-btn) !important;
+  clip-path: $clip-path;
+  border-radius: 28px !important;
+  padding: clamp(1.8em, 2.5vw, 2.5em);
+  box-shadow: inset 0px 0px 4px rgba(0, 0, 0, 0.2) !important;
+  transition: 0.2s ease-in-out;
+  span {
+    color: var(--clr-text-btn) !important;
+    font-weight: 600 !important;
+    letter-spacing: -0.1ch !important;
+  }
+}
 .label {
   color: $clr-label !important;
   font-size: $font-size-header !important;
@@ -250,7 +265,7 @@ p:not(.not_typography, .not) {
 }
 .activeClass:is(:hover, :focus) {
   background-color: var(--clr-btn-active) !important;
-  span {
+  i,span {
     color: var(--clr-text-btn-active) !important;
   }
 }

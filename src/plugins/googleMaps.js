@@ -6,7 +6,10 @@ import Vue from 'vue'
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyB8dExdQtd6WILpKT57uF2boPp8VyCIufk',
+    map_id: '6840d2b70ceb1209',
+    libraries: "places",
   },
+  installComponents: true
 })
 // geolocation
 Vue.use(VueGeolocation);

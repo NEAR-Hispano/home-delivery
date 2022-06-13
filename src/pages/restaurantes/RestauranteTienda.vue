@@ -26,10 +26,10 @@
         <aside class="contmapa divcol jend">
           <div class="divcol">
             <label class="h10_em">{{$t('direccion')}}</label>
-            <span class="h11_em">dirección url o lo que sea que quieras poner</span>
+            <span class="h11_em">{{perfil.location.direccion}}</span>
           </div>
 
-          <GoogleMap></GoogleMap>
+          <GoogleMap ref="map"></GoogleMap>
         </aside>
       </section>
     </v-col>
@@ -136,9 +136,18 @@ export default {
   name: "restauranteTienda",
   components: { GoogleMap },
   i18n: require("./i18n"),
+  mounted() {
+    this.$refs.map.userCoordinates = this.perfil.location.coordinates
+  },
   data() {
     return {
       activeRipple:false,
+      perfil: {
+        location:{
+          direccion: 'direccion del lugar',
+          coordinates: { lat:9.988903846136667, lng:-67.6891094161248 }
+        }
+      },
       filters: {
         filterName: null,
         filterExcluir: [],

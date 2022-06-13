@@ -17,6 +17,7 @@
     "core-js": "^3.10.1",
     "css-loader": "^4.3.0",
     "font-awesome": "^4.7.0",
+    "marker-clusterer-plus": "^2.1.4",
     "near-api-js": "^0.44.2",
     "vue": "^2.6.12",
     "vue-advanced-chat": "^1.5.4",

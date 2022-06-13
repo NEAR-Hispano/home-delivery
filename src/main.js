@@ -8,6 +8,9 @@ import store from './store/index'
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
+import GmapCluster from 'vue2-google-maps/dist/components/cluster'
+
+Vue.component('GmapCluster', GmapCluster)
 
 
 Vue.config.productionTip = false

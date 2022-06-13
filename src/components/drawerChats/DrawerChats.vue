@@ -28,6 +28,7 @@
       </section>
 
       <chat-window
+        ref="noir"
         :current-user-id="currentUserId"
         :rooms="rooms"
         :rooms-loaded="roomsLoaded"
@@ -111,8 +112,8 @@ export default {
   },
   mounted () {
     this.currentUserId = 1
+    this.messagesLoaded = false
     this.initChatComponent()
-    
   },
   methods: {
     initChatComponent(){
@@ -125,9 +126,8 @@ export default {
     },
     handleChats(){
       this.axios.post(CHATS).then((res) => {
-        console.log(res.code)
-        if (res.code[0] !== 2) {
-          console.log(res.code)
+        if (res.status !== 201) {
+          console.log(res)
         }
       }).catch((e)=>console.log(e))
     },
@@ -140,7 +140,7 @@ export default {
         // console.log(res.status.charAt(0))
         if (res.status !== 200) {
         } else {
-          console.log(res.code)
+          console.log(res.status)
           res.data.forEach((element) => {
             habs.push(element);
           })
@@ -151,20 +151,24 @@ export default {
       }).catch((e)=>console.log(e))
     },
     handleMessage(data){
-      console.log(data)
+      this.esperando = true
       this.axios.post(MESSAGES,{content:data.content,replyMessage:data.replyMessage,roomId:data.roomId,usuario:1}).then((res) => {
-        if (res.code !== 201) {
-          console.log(res.code)
+        if (res.status !== 201) {
+          console.log(res)
+        } else {
+          this.$refs.noir.fetch-messages
+          this.esperando = false
         }
       }).catch((e)=>console.log(e))
     },
     fetchMessages({ room, options }) {
-      this.messagesLoaded = false
+      console.log('refs')
       var msgs = []
       this.axios.get(MESSAGES).then((res) => {
         res.data.forEach((element) => {
           msgs.push(element);
         });
+        this.esperando = false
         this.messages = msgs
         this.messagesLoaded = true
       })

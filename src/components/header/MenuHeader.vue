@@ -36,32 +36,32 @@
       activator=".openOptions"
       :close-on-content-click="false"
     >
-      <v-expansion-panels
-        focusable
-        class="menuGlobal"
-      >
-        <v-expansion-panel>
-          <!-- expansion -->
-          <template v-if="dataMenuOptions.expansion">
+      <v-expansion-panels focusable class="menuGlobal">
+        <!-- expansion -->
+        <template v-if="dataMenuOptions.expansion">
+          <v-expansion-panel v-for="(item, i) in dataMenuOptions.expansion" :key="i">
             <v-expansion-panel-header>
-              {{ $t(dataMenuOptions.expansion.name) }}
+              {{ $t(item.key) }}
             </v-expansion-panel-header>
 
             <v-expansion-panel-content>
-              <v-list v-for="(item, i) in dataMenuOptions.expansion.selection" :key="i">
-                <v-list-item @click="CambiarLanguaje(item.key); optionMenu = false"
+              <v-list v-for="(item2, i) in item.selection" :key="i">
+                <v-list-item @click="CambiarLanguaje(item2.key); optionMenu = false"
                   class="activeClass">
                   <v-list-item-title class="center">
-                    <span class="not_clr">{{ $t(item.name) }}</span>
+                    <span class="not_clr">{{ $t(item2.name) }}</span>
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-expansion-panel-content>
-          </template>
+          </v-expansion-panel>
+        </template>
 
-          <!-- list -->
-          <!-- <v-list v-if="item.name" class="intoExpansion">
-            <v-list-item @click="SelectOptionItem(item.key)">
+        <!-- list -->
+        <!--<template v-if="dataMenuOptions.list">
+          <v-list class="intoExpansion">
+            <v-list-item v-for="(item,i) in dataMenuOptions.list" :key="i"
+              @click="SelectOptionItem(item.key)">
               <v-list-item-title>
                 <v-badge
                   :content="messages"
@@ -71,12 +71,12 @@
                   class="not_clr"
                   style="margin: 0"
                 >
-                  {{ item.name }}
+                  {{ item.key }}
                 </v-badge>
               </v-list-item-title>
             </v-list-item>
-          </v-list> -->
-        </v-expansion-panel>
+          </v-list>
+        </template>-->
       </v-expansion-panels>
     </v-menu>
 
@@ -91,34 +91,36 @@
       :close-on-content-click="false"
     >
       <v-expansion-panels focusable class="menuGlobal">
-        <v-expansion-panel>
-          <!-- expansion -->
-          <template v-if="dataMenuLogout.expansion">
+        <!-- expansion -->
+        <template v-if="dataMenuLogout.expansion">
+          <v-expansion-panel v-for="(item, i) in dataMenuLogout.expansion" :key="i">
             <v-expansion-panel-header>
-              {{ $t(dataMenuLogout.expansion.key) }}
+              {{ $t(item.key) }}
             </v-expansion-panel-header>
+
             <v-expansion-panel-content>
-              <v-list v-for="(item, i) in dataMenuLogout.expansion.selection" :key="i">
-                <v-list-item class="activeClass" :to="item.to" @click.stop="logout = false">
+              <v-list v-for="(item2, i) in item.selection" :key="i">
+                <v-list-item class="activeClass" :to="item2.to" @click.stop="logout = false">
                   <v-list-item-title class="center">
-                    <span class="not_clr">{{ $t(item.key) }}</span>
+                    <span class="not_clr">{{ $t(item2.key) }}</span>
                   </v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-expansion-panel-content>
-          </template>
-
-          <!-- list -->
-          <template v-if="dataMenuLogout.list">
-            <v-list v-for="(item,i) in dataMenuLogout.list" :key="i" class="intoExpansion">
-              <v-list-item @click.stop="Logout()">
-                <v-list-item-title>
-                  <span class="not_clr">{{ $t(item.key) }}</span>
-                </v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </template>
-        </v-expansion-panel>
+          </v-expansion-panel>
+        </template>
+        
+        <!-- list -->
+        <template v-if="dataMenuLogout.list">
+          <v-list class="intoExpansion">
+            <v-list-item v-for="(item,i) in dataMenuLogout.list" :key="i"
+              @click.stop="Logout()">
+              <v-list-item-title>
+                <span class="not_clr">{{ $t(item.key) }}</span>
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </template>
       </v-expansion-panels>
     </v-menu>
   </section>
@@ -146,26 +148,29 @@ export default {
       messages: 1,
       search: "",
       dataMenuOptions: {
-        expansion: {
-          name: "idioma",
-          key: "idioma",
-          selection: [{name: "ingles", key: "US"}, {name: "español", key: "ES"}]
-        }
+        expansion: [
+          {
+            key: "idioma",
+            selection: [{name: "ingles", key: "US"}, {name: "español", key: "ES"}],
+          },
+        ],
       },
       dataMenuLogout: {
-        expansion: {
-          key: "ajustes",
-          selection: [
-            {
-              key: "perfil",
-              to: "/mi-perfil",
-            },
-            {
-              key: "tienda",
-              to: "/mi-tienda",
-            },
-          ]
-        },
+        expansion: [
+          {
+            key: "ajustes",
+            selection: [
+              {
+                key: "perfil",
+                to: "/mi-perfil",
+              },
+              {
+                key: "tienda",
+                to: "/mi-tienda",
+              },
+            ],
+          },
+        ],
         list: [
           { key: "logout" }
         ]

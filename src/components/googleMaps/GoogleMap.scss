@@ -1,34 +1,47 @@
 @use "@/styles/app" as *;
 
 /* googleMap */
-.inputGoogleSearch {
-  --distance: 1.5em;
-  @include absolute(var(--distance),var(--distance));
-  width: 50px;
-  background-color: var(--clr-card-2) !important;
-  border: 2px solid $clr-btn-2;
-  border-radius: $border-card !important;
-  overflow: hidden;
-  z-index: 2;
-  transition: .5s $ease-return;
-  &.v-text-field--solo .v-input__slot {padding: 0 1em 0 0 !important;clip-path: none !important}
-  &:hover {width: 40%;
-  }
-}
-.vue-map-container {
+.mapContainer {
+  position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 6px 5px rgba(0, 0, 0, .2);
-  overflow: hidden;
-  .vue-map {width: 100%;height: 100%}
-  div[draggable="false"]:not(.gm-style-cc) {border-radius: $border-btn !important;background-color: $clr-btn-2 !important}
-  .gm-control-active {
-    background-color: $clr-btn-2 !important;
-    border-radius: 50% !important;
-    img {filter: invert(100%) contrast(10)}
+  >*:not(.vue-map-container) {z-index: 2}
+  .searchIcon {
+    --distance: 2em;
+    @include absolute(var(--distance),var(--distance));
+    background-color: var(--clr-card-2);
+    z-index: 3 !important;
+    pointer-events: none;
   }
-  .localImg {
-    width: 10em;
+  .inputGoogleSearch {
+    --distance: 1.3em;
+    --hideSize: 50px;
+    @include absolute(var(--distance),var(--distance));
+    width: var(--hideSize);
+    height: var(--hideSize);
+    background-color: var(--clr-card-2) !important;
+    border: 2px solid $clr-btn-2;
+    border-radius: $border-card !important;
+    overflow: hidden;
+    z-index: 2;
+    transition: .5s $ease-return;
+    padding-inline: 1em;
+    &.active {width: min(60%,20em); padding-inline: 3em 1em;}
+  }
+  // prefers default into map
+  .vue-map-container {
+    width: inherit;
+    height: inherit;
+    box-shadow: 0 0 6px 5px rgba(0, 0, 0, .2);
+    overflow: hidden;
+    .vue-map {width: inherit;height: inherit}
+    div[draggable="false"]:not(.gm-style-cc) {border-radius: $border-btn !important;background-color: $clr-btn-2 !important}
+    .gm-control-active {
+      background-color: $clr-btn-2 !important;
+      border-radius: 50% !important;
+      img {filter: invert(100%) contrast(10)}
+    }
+    .localImg {width: 10em}
   }
 }
 
@@ -49,5 +62,30 @@
   .vue-map-container {
     border-radius: $border-card;
     border: 4px solid $clr-btn;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////
+// // // modalDirection // // //
+//////////////////////////////////////////////////////////////////////
+#modalDirection {
+  .textField_direccion {
+    .v-input__slot {clip-path: none !important;border: 1.5px solid #000000}
+    @include absolute(50%, 10px);
+    transform: translateX(-50%);
+    z-index: 3 !important;
+    @include animation(.5s $ease-return) {
+      0% {transform: translate(-50%, -95%)}
+      100% {transform: translate(-50%, 0)}
+    }
+  }
+  .botones2 {
+    @include absolute(50%, 85px);
+    transform: translateX(-50%);
+    z-index: 2 !important;
+    @include animation(.5s $ease-return) {
+      0% {transform: translate(-50%, -95%)}
+      100% {transform: translate(-50%, 0)}
+    }
   }
 }

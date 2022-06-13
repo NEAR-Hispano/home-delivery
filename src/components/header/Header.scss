@@ -37,9 +37,7 @@
         transition: 0.2s ease-in-out;
         height: 100%;
         animation: aparecer 0.5s ease-in-out;
-        span {
-          color: $clr-text-btn;
-        }
+        span {color: $clr-text-btn}
       }
     }
   }
@@ -89,7 +87,9 @@
     span {color: $clr-label;font-size: $font-size-header;font-weight: 600}
   }
   .intoExpansion {
+    width: 100%;
     background-color: var(--clr-card-2);
+    border: 2px solid #CFCFCF;
     .v-list-item {
       padding-inline: 24px;
       .v-list-item__title {

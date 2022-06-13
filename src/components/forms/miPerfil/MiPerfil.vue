@@ -1,7 +1,9 @@
 <template>
   <section id="miPerfil" class="parentForm section">
     <Alerts ref="alerts"></Alerts>
-    <MenuForms ref="menu"></MenuForms>
+    <MenuForms ref="menu"
+      @getDirection="(direccion,coordinates)=>{perfil.direccion=direccion; perfil.location=coordinates}"
+    ></MenuForms>
     <v-col class="contmiperfil divcol gap2">
       <aside class="contup divcol">
         <h1 class="h7_em">{{$t('miPerfil')}}</h1>
@@ -44,15 +46,18 @@
           ></v-text-field>
         </v-card>
         <v-card color="transparent">
-          <label for="Dirección" class="h10_em">
+          <label class="h10_em" @click="$refs.menu.modalDirection=true">
             {{$t('direccion')}}
           </label>
 
-          <v-text-field
-            id="Dirección"
-            v-model="perfil.direccion"
-            solo
-          ></v-text-field>
+          <v-sheet color="transparent" style="cursor:pointer" @click="$refs.menu.modalDirection=true">
+            <v-text-field
+              v-model="perfil.direccion"
+              solo
+              disabled
+              hide-details
+            ></v-text-field>
+          </v-sheet>
         </v-card>
         <v-card color="transparent">
           <label for="foto" class="h10_em">
@@ -93,14 +98,13 @@
               color="var(--clr-card-2)"
               id="vendedor"
               class="openVendedorAlert">
-              <img   v-if="foto2 == true" src="@/assets/icons/check.svg" alt="check button for merchant">
+              <img v-if="foto2 == true" src="@/assets/icons/check.svg" alt="check button for merchant">
             </v-btn>
             <label for="vendedor" class="h10_em">
               {{$t('preguntaVendedor')}}
             </label>
           </div>
-
-          </v-card>
+        </v-card>
       </aside>
 
       <aside class="contsubmit center">
@@ -127,7 +131,7 @@ export default {
       walletid: null,
       foto: false,
       foto2: false,
-      perfil: {wallet: localStorage.getItem('walletid')},
+      perfil: {wallet: localStorage.getItem('walletid'), direccion:null, location: null},
     }
   },
   mounted(){

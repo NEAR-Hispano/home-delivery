@@ -1,7 +1,7 @@
 <template>
   <v-row id="navbar" class="alignmobile">
     <!-- logo -->
-    <a href="#" class="contlogo align eliminarmobile">
+    <a class="contlogo align eliminarmobile">
       <img class="logo" src="@/assets/logos/logo.svg" alt="Logo" @click="to('inicio')">
     </a>
     <!-- content -->
@@ -96,7 +96,8 @@ export default {
       this.dataNavbar.forEach(element => {element.active = false});
     },
     to(item) {
-      this.clearAll()
+      this.clearAll();
+      const route = this.$router.currentRoute.name;
       if (item.key == 'inicio' || item == 'inicio') {
         // if external or internal navbar call
         if (item == "inicio") {
@@ -104,7 +105,7 @@ export default {
           index.active = true;
           index.icon = icon1Active;
             // push select
-            if (item == "inicio") {this.$router.push({name:'inicio'})}
+            if (item == "inicio"&&route!=='inicio') {this.$router.push({name:'inicio'})}
         } else {
           item.active = true;
           item.icon = icon1Active
@@ -117,8 +118,8 @@ export default {
           index.active = true;
           index.icon = icon2Active;
             // push select
-            if (item == "restaurantes") {this.$router.push('/restaurantes')}
-            else if (item == "restaurante-tienda") {this.$router.push('/restaurante-tienda')}
+            if (item == "restaurantes"&&route!=='restaurantes') {this.$router.push('/restaurantes')}
+            else if (item == "restaurante-tienda"&&route!=='restaurante-tienda') {this.$router.push('/restaurante-tienda')}
         } else {
           item.active = true;
           item.icon = icon2Active
@@ -131,7 +132,7 @@ export default {
           index.active = true;
           index.icon = icon3Active;
             // push select
-            if (item == "tienda") {this.$router.push('/tienda')}
+            if (item == "tienda"&&route!=='tienda') {this.$router.push('/tienda')}
         } else {
           item.active = true;
           item.icon = icon3Active
@@ -144,7 +145,7 @@ export default {
           index.active = true;
           index.icon = icon4Active;
             // push select
-            if (item == "pedido") {this.$router.push('/pedido')}
+            if (item == "pedido"&&route!=='pedido') {this.$router.push('/pedido')}
         } else {
           item.active = true;
           item.icon = icon4Active

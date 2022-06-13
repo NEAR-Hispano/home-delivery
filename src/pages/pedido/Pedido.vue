@@ -8,7 +8,7 @@
       </aside>
 
       <v-card class="grid">
-        <GoogleMapNearbyPlace class="map"></GoogleMapNearbyPlace>
+        <GoogleMap ref="map" class="map"></GoogleMap>
 
         <aside class="divcol spacea relative">
           <p class="h10_em semibold">
@@ -21,7 +21,7 @@
           </p>
           <p class="h10_em semibold">
             <span>{{$t('direccion')}}: </span>
-            {{previewPedido.direction}}
+            {{previewPedido.location.direccion}}
           </p>
           <p class="h10_em semibold">
             <span>{{$t('distanciaTotal')}}: </span>
@@ -42,8 +42,9 @@
         <v-card v-for="(item,i) in dataHistorial" :key="i"
           class="divcol" :style="`width:${widthListener}`"
           @click="ViewCard(item)" v-ripple="{class: 'activeRipple'}">
-          <GoogleMap :class="{completado:item.state=='completado',enCurso:item.state=='enCurso',cancelado:item.state=='cancelado'}"
-          class="mapa" :style="`--tag: '${$t(item.state)}'`"></GoogleMap>
+          <GoogleMap :class="{completado:item.state=='completado', enCurso:item.state=='enCurso',
+            cancelado:item.state=='cancelado'}" class="mapa"
+            :style="`--tag: '${$t(item.state)}'`"></GoogleMap>
 
           <aside class="divcol center tcenter">
             <h3 class="h8_em semibold tnone">{{item.user}}</h3>
@@ -58,12 +59,14 @@
 
 <script>
 import GoogleMap from '@/components/googleMaps/GoogleMap.vue'
-import GoogleMapNearbyPlace from '@/components/googleMaps/GoogleMapNearbyPlace.vue'
 import ModalPedido from './ModalPedido'
 export default {
   name: "pedido",
-  components: { GoogleMap, GoogleMapNearbyPlace, ModalPedido },
+  components: { GoogleMap, ModalPedido },
   i18n: require("./i18n"),
+  mounted() {
+    this.$refs.map.userCoordinates = this.previewPedido.location.coordinates
+  },
   data() {
     return {
       previewPedido: {
@@ -71,14 +74,20 @@ export default {
         information: "X racion de x, X litros de X, Mantener X, no agitar por motivo x.",
         dollar: "2.7",
         near: "X",
-        direction: "Ueb. X, Calle X, Casa X. (Extra info)",
+        location: {
+          direccion: "Ueb. X, Calle X, Casa X. (Extra info)",
+          coordinates: { lat:9.988903846136667, lng:-67.6891094161248 }
+        },
         distance: "2.0 km",
       },
       dataHistorial: [
         {
           user: "ramon.near",
           information: "X racion de x, X litros de X, Mantener X, no agitar por motivo x.",
-          direction: "Ueb. X, Calle X, Casa X. (Extra info)",
+          location: {
+            direccion: "Ueb. X, Calle X, Casa X. (Extra info)",
+            coordinates: { lat:9.988903846136667, lng:-67.6891094161248 }
+          },
           dollar: "2.7",
           near: "X",
           distance: "2.0 km",
@@ -88,7 +97,10 @@ export default {
         {
           user: "martin.near",
           information: "1 racion de pollo, X litros de soda, Mantener siete, no agitar por motivo 0p.",
-          direction: "Ueb. gol, Calle 32, Casa asd. (Extra info)",
+          location: {
+            direccion: "Ueb. gol, Calle 32, Casa asd. (Extra info)",
+            coordinates: { lat:9.930025264822069, lng:-67.73924811290375 }
+          },
           dollar: "2.7",
           near: "1",
           distance: "2.0 km",
@@ -98,7 +110,10 @@ export default {
         {
           user: "aloha.near",
           information: "22 racion de 12, 0 litros de 5, Mantener 4, no agitar por motivo 2.",
-          direction: "Ueb. asd, Calle bcd, Casa asd. (Extra info)",
+          location: {
+            direccion: "Ueb. asd, Calle bcd, Casa asd. (Extra info)",
+            coordinates: { lat:10.041521779918515, lng:-67.74578609358772 }
+          },
           dollar: "4.7",
           near: "2",
           distance: "5.0 km",
@@ -113,7 +128,9 @@ export default {
   },
   methods: {
     ViewCard(item) {
-      this.previewPedido = item
+      this.previewPedido = item;
+      this.$refs.map.userCoordinates = this.previewPedido.location.coordinates
+      this.$refs.map.map.setCenter(this.previewPedido.location.coordinates)
     },
   },
 };

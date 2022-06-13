@@ -22,3 +22,21 @@
     }
   }
 }
+
+//////////////////////////////////////////////////////////////////////
+// // // modalDirection // // //
+//////////////////////////////////////////////////////////////////////
+#modalDirection {
+  border-radius: $border-card;
+  clip-path: $clip-path-2;
+  box-shadow: $sombra-card-2 !important;
+  overflow-x: hidden;
+  position: relative;
+  height: 40em;
+  @include media(max, small) {height: 90vh; margin-block: auto}
+  .close {
+    --distance: 1.5em;
+    @include absolute(auto, var(--distance), var(--distance));
+    z-index: 2 !important;
+  }
+}

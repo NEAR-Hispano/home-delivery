@@ -5,66 +5,120 @@
 //////////////////////////////////////////////////////////////////////
 #tienda {
   .contup {
+    --height: 350px;
     padding-top: 2em;
     padding-bottom: 0;
-    // padding-inline: 5%;
-    & > img {transform: translateY(22%) rotate(-13deg);filter: $sombra-filter;}
-  }
-  .contdown {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2em;
-    padding-inline: auto 5%;
-    .wrapper {
-      div {
-        gap: 1em;
-        margin-bottom: 0.75em;
-        h2 {letter-spacing: -0.13em !important;font-weight: 700 !important;margin-bottom: 0 !important;}
-        .v-btn {
-          padding: 1em !important;
-          img {
-            width: 1em !important;
-          }
+    @include media(min, small) {padding-top: 2em};
+    padding-inline: clamp(0, 2.75vw, 2.75em) 5%;
+    @include media(max, small) {padding-inline: clamp(0, 2.75vw, 2.75em);}
+    .contbanner {
+      width: 100%;
+      display: grid;
+      gap: clamp(1em, 2vw, 2em);
+      @include media(min, small) {grid-template-columns: 1fr 30%}
+      .v-image {
+        border-radius: $border-btn $border-btn 0 0;
+        height: var(--height) !important;
+        .backBtn {
+          @include absolute(.5em,.5em);
+          animation: moveleft .5s $ease-return;
+        }
+        span {
+          --distance: .5em;
+          @include absolute(auto, var(--distance), var(--distance));
+          text-transform: lowercase !important;
+          font-weight: 600 !important;
+          color: #FFFFFF !important;
+          &+span {@include absolute(auto, calc(var(--distance)*4), var(--distance))}
         }
       }
-      & div + .col {
-        border-radius: $border-card 0 0 $border-card !important;
-        box-shadow: $sombra-card, $sombra-card, $sombra-card !important;
-        background-color: var(--clr-card);
-        padding: 2em;
-        overflow-y: scroll;
-        min-height: 500px;
-        max-height: 500px;
-        &::-webkit-scrollbar-thumb {border-radius: $border-card;}
-        .v-card {
-          gap: 1em;
+    }
+    .contHistorial {
+      height: var(--height);
+      background-color: rgba($clr-btn-2, $alpha: .5);
+      border-radius: 10px 60px 10px 10px / 5px 200px 5px 5px;
+      box-shadow: $sombra-btn !important;
+      padding: 1em;
+      position: relative;
+      overflow: hidden;
+      .decoration {
+        @include absolute(5px, calc(5px * var(--distance)));
+        transform: translateY(-29px);
+        border-radius: 50%;
+        border: 3px ridge rgba(0,0,0,0.5);
+        width: 10px;
+        height: 10px;
+        filter: $sombra-filter;
+      }
+      h3 {@include colorText(linear-gradient(180deg, $clr-btn 65%, black, $clr-btn)); padding-inline: 8px 20px}
+    }
+  }
+  .contdown {
+    grid-gap: 2em;
+    padding-inline: auto 5%;
+    h2 {letter-spacing: -0.13em !important;font-weight: 600 !important;margin-bottom: 0 !important;
+      .v-btn {padding: 1em !important;img {width: 1em !important}
+      }
+    }
+    .contRestaurantList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(18em, 20vw, 20em)), 1fr));
+      grid-gap: 1em;
+      @include media(max, medium) {grid-gap: 2em}
+      .card {
+        height: max-content;
+        gap: clamp(0.5em, 1vw, 1em);
+        border-radius: $border-card;
+        clip-path: $clip-path-2;
+        box-shadow: $sombra-card-2!important;
+        overflow: hidden;
+        @include media(max, small) {margin-inline: auto}
+        .contImages {
+          height: 15em;
+          overflow: hidden;
           position: relative;
-          padding-inline: clamp(1em, 3vw, 3em);
-          padding-bottom: 1em;
-          &::before {
-            content: "";
-            position: absolute;
-            background-color: #191919;
-            bottom: 0;
-            width: 80%;
-            height: 1px;
-            filter: $sombra-filter;
+          transition: .3s $ease-return;
+          .images {
+            width: 100%;
+            height: 100%;
+            transition: .5s $ease-return;
+            &:is(:hover, :focus) {
+              mix-blend-mode: multiply;
+              transform: scale(1.05);
+            }
           }
-          aside:nth-child(1) {
-            gap: 1em;
-            img {
-              width: 7em;
-              height: 7em;
-              border-radius: $border-btn;
-              background-color: var(--clr-card-2);
-              padding: 0.5em;
+          label {
+            @include absolute(0,-50px,0);
+            color: $clr-text-btn !important;
+            @include stroke(1px $clr-btn);
+            pointer-events: none;
+            text-align: center;
+            z-index: 2;
+            transition: .3s $ease-return;
+          }
+          &:is(:hover, :focus) {
+            background-image: linear-gradient(180deg, rgba(black, .4), rgba(white, .2));
+            & label {top: 20% !important}
+          }
+        }
+        .contcard {
+          padding-inline: 2em;
+          padding-bottom: 1.8em;
+          gap: 1em;
+          p {
+            width: max-content;
+            line-height: 1;
+            letter-spacing: -0.15ch;
+          }
+          .contPrice {
+            font-size: clamp(1em, 1.2vw, 1.2em);
+            .logoNear {
+              --size: 1em;
+              width: var(--size);
+              height: var(--size);
             }
-              .contInfo {
-                line-height: 1.2;
-              & > div {
-                gap: 1em;
-              }
-            }
+            span {color: $clr-label}
+            .price {color: mix($clr-label, #000000) !important}
           }
         }
       }

@@ -59,12 +59,16 @@
             @click="item.ifw=!item.ifw"
             @dragend="mapClicked">
             <gmap-info-window :opened="item.ifw">
-              <div class="grid" style="grid-template-columns:repeat(2,1fr); gap:0 1em">
-                <h4>latitud</h4>
-                <h4>Longitud</h4>
-                <span>{{item.ifw2latText}}</span>
-                <span>{{item.ifw2lngText}}</span>
-              </div>
+              <section class="marker jcenter">
+                <div class="divcol">
+                  <h4>latitud</h4>
+                  <span>{{item.ifw2latText}}</span>
+                </div>
+                <div class="divcol">
+                  <h4>Longitud</h4>
+                  <span>{{item.ifw2lngText}}</span>
+                </div>
+              </section>
             </gmap-info-window>
           </gmap-marker>
         </template>

@@ -39,7 +39,7 @@ export default new Router({
         },
         {
           path: '/mi-menu',
-          name: 'menu',
+          name: 'miMenu',
           component: () => import('@/components/forms/miMenu/MiMenu'),
         },
         // {

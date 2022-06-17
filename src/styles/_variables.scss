@@ -44,12 +44,12 @@ $font-size-navbar:            clamp(0.6em, 1.2vw, 0.8em);
 $card-shadow: 0 3px 11px 0 #111011, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A;
 $sombra-card: 0px 4px 50px rgba(0, 0, 0, 0.05);
 $border-card: 60px;
+$sombra-card-2: inset 0 0 30px -15px rgba(black, .5);
 
 // Buttons //
 $button-shadow: 0px 3px 11px 0px #E8EAFC, 0 3px 3px -2px #B2B2B21A, 0 1px 8px 0 #9A9A9A1A;
 $sombra-btn: 0px 4px 4px rgba(0, 0, 0, 0.2);
 $border-btn: 20px;
-$sombra-card-2: inset 0 0 30px -15px rgba(black, .5);
 
 // hover //
 $ease: cubic-bezier(0.23, 1, 0.32, 1);

@@ -93,26 +93,14 @@
 // // // modal pedido // // //
 //////////////////////////////////////////////////////////////////////
 #modalPedido {
+  .titulo {color: $clr-btn-2 !important; font-weight: 700}
   @include media(min, small) {grid-template-columns: repeat(2, 1fr);grid-template-rows: repeat(2, 1fr)}
   padding-top: 1em;
-  @include media(max, small) {padding-top: 2em;min-height: 100vh}
-  border-radius: $border-card;
-  clip-path: $clip-path-2;
-  box-shadow: $sombra-card-2 !important;
-  overflow-x: hidden;
-  position: relative;
-  .close {
-    --distance: 1.5em;
-    @include absolute(auto, var(--distance), var(--distance));
-    z-index: 2;
-  }
+  @include media(max, small) {padding-top: 2em}
   section {
     padding: 2em;
     span:last-child .coma {display: none}
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      grid-gap: 1em;
-    }
+    .grid {grid-template-columns: repeat(2, 1fr);grid-gap: 1em}
   }
   .first {
     grid-row: span 2;

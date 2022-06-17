@@ -10,12 +10,10 @@ module.exports = {
       perfil: "Perfil",
       tienda: "Mi Tienda",
       logout: "Cerrar sesión",
-      // dataMenuOptions: {
-      //   expansion: {
-      //     key: "idioma",
-      //     selection: [{name: "Ingles", key: "US"}, {name: "Español", key: "ES"}]
-      //   }
-      // },
+      // modal shop cart
+      informacionPedido: "INFORMACIÓN DEL PEDIDO",
+      precioPedido: "PRECIO DEL PEDIDO",
+      direccionEntrega: "DIRECCION DE ENTREGA",
     },
     US: {
       labelBuscar: "Search by food / Restaurant",
@@ -27,12 +25,10 @@ module.exports = {
       perfil: "Profile",
       tienda: "My Shop",
       logout: "Log out",
-      // dataMenuOptions: {
-      //   expansion: {
-      //     key: "Language",
-      //     selection: [{name: "English", key: "US"}, {name: "Spanish", key: "ES"}]
-      //   }
-      // },
+      // modal shop cart
+      informacionPedido: "ORDER INFORMATION",
+      precioPedido: "ORDER PRICE",
+      direccionEntrega: "DELIVERY ADDRESS",
     }
   }
 }

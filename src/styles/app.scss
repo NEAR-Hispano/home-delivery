@@ -52,7 +52,15 @@
 
 // v-dialogs
 .v-dialog--scrollable {
-  @include media(max, small) {margin: 0 !important; min-height: 100% !important}
+  @include media(max, small) {margin: 0 !important;max-height: 99% !important;min-height: 99% !important}
+  &>*, & > .v-card {
+    border-radius: 40px 40px 80px 80px / 150px !important;
+    border: 5px solid $clr-btn !important;
+    clip-path: $clip-path-2 !important;
+    box-shadow: $sombra-card-2 !important;
+    overflow-x: hidden !important;
+    position: relative;
+  }
 }
 
 
@@ -66,7 +74,7 @@
 :is(.v-icon, a, input):not(.not_clr, .not) {
   color: var(--clr) !important;
 }
-::selection {background-color: #ffac40}
+::selection {background-color: #ffac40; color: #FFFFFF}
 label:not(.not_clr, .not) {
   color: var(--clr-label);
   font-weight: 700;
@@ -77,6 +85,12 @@ label:not(.not_clr, .not) {
 .activeRipple {
   span {
     color: $clr-btn !important;
+    // background-color: $clr-btn-3 !important;
+  }
+}
+.activeRipple2 {
+  span {
+    color: $clr-text-btn !important;
     // background-color: $clr-btn-3 !important;
   }
 }
@@ -94,7 +108,7 @@ label:not(.not_clr, .not) {
 //////////////////////////////////////////////////////////////////////
 /* // // typography // // */
 //////////////////////////////////////////////////////////////////////
-*:not(.not_typography, .not) {text-transform: uppercase}
+*:not(.not_transform, .not_typography, .not) {text-transform: uppercase}
 a:not(.not_typography, .not) {text-decoration: none}
 input {text-transform: none !important}
 
@@ -123,6 +137,13 @@ p:not(.not_typography, .not) {
 //////////////////////////////////////////////////////////////////////
 /* // // other adjusts // // */
 //////////////////////////////////////////////////////////////////////
+
+/* // // close button // // */
+.close {
+  --distance: 1.5em;
+  @include absolute(auto, var(--distance), var(--distance));
+  z-index: 2;
+}
 
 /* // // input file // // */
 .input-file {
@@ -207,16 +228,6 @@ p:not(.not_typography, .not) {
   color: $clr-text-btn !important;
   .v-icon {
     color: $clr-text-btn !important;
-  }
-}
-
-.add {
-  background-color: $clr-btn;
-  filter: $sombra-filter;
-  padding: 1.6em;
-  img {
-    width: 2em;
-    transform: translateX(5%);
   }
 }
 

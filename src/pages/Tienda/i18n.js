@@ -1,12 +1,32 @@
 module.exports = {
   messages: {
     ES: {
-      sesion: "iniciar sesion",
-      savePhrase: 'Este registro genera una frase de 12 palabras que debe guardar en un lugar seguro',
+      // tienda
+      filtrar: "Filtrar",
+      excluir: "Excluir",
+      incluir: "Incluir",
+      filters: {
+        filterName: {
+          label: "Ordenar por",
+          by: ["Nombre", "Autor"],
+        },
+        filterExcluir: ["Blabla", "Algoalgo"],
+        filterIncluir: ["Blabla", "Algoalgo"],
+      },
     },
     US: {
-      sesion: "log in",
-      savePhrase: 'This record generates a 12-word phrase that you must keep in a safe place',
+      // tienda
+      filtrar: "Filter",
+      excluir: "Suppress",
+      incluir: "Include",
+      filters: {
+        filterName: {
+          label: "Order by",
+          by: ["Name", "Author"]
+        },
+        filterExcluir: ["Blahblah", "Thingthing"],
+        filterIncluir: ["Blahblah", "Thingthing"],
+      },
     }
   }
 }

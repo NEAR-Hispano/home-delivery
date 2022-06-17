@@ -43,7 +43,7 @@
               <span v-if="item.key=='logout'">{{ item.text }}</span>
             </v-btn>
 
-            <v-btn class="botones">
+            <v-btn class="botones" @click="$refs.menu.modalShopCart=true">
               <v-badge
                 :content="messages"
                 :value="messages"
@@ -107,7 +107,7 @@
         const wallet = new WalletConnection(near);
         if (action === 'login') {
           wallet.requestSignIn(
-            "min.mintick.testnet",
+            "contract1.ccoronel7.testnet",
           );
         } else if (action === 'logout') {
           wallet.signOut()

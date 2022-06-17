@@ -13,7 +13,9 @@
         <span class="h10_em bold">{{$t('informacionPedido')}}</span>
         <aside class="grid">
           <span v-for="(value, key) in dataModalPedido.pedido" :key="key"
-            class="h11_em semibold">{{key}}: {{value}}<span class="coma">,</span></span>
+            class="h11_em semibold">
+            <span class="titulo">{{key}}:</span> {{value}}<span class="coma">,</span>
+          </span>
         </aside>
       </section>
       
@@ -21,7 +23,9 @@
         <span class="h10_em bold">{{$t('informacionVendedor')}}</span>
         <aside class="grid">
           <span v-for="(value, key) in dataModalPedido.vendedor" :key="key"
-            class="h11_em semibold">{{key}}: {{value}}<span class="coma">,</span></span>
+            class="h11_em semibold">
+            <span class="titulo">{{key}}:</span> {{value}}<span class="coma">,</span>
+          </span>
         </aside>
       </section>
       
@@ -29,7 +33,9 @@
         <span class="h10_em bold">{{$t('informacionDelivery')}}</span>
         <aside class="grid">
           <span v-for="(value, key) in dataModalPedido.delivery" :key="key"
-            class="h11_em semibold">{{key}}: {{value}}<span class="coma">,</span></span>
+            class="h11_em semibold">
+            <span class="titulo">{{key}}:</span> {{value}}<span class="coma">,</span>
+          </span>
         </aside>
       </section>
     </v-card>

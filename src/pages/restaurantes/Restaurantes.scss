@@ -28,19 +28,17 @@
       }
     }
     .contRestaurantList {
-      --max-size: 20em;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(clamp(15em, 20vw, var(--max-size)), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(18em, 20vw, 20em)), 1fr));
       grid-gap: 1em;
       @include media(max, medium) {grid-gap: 2em}
       .card {
-        max-width: var(--max-size);
-        @include media(max, 600px) {max-width: 100% !important};
         height: max-content;
         gap: clamp(0.5em, 1vw, 1em);
         border-radius: $border-card;
         clip-path: $clip-path-2;
         box-shadow: $sombra-card-2 !important;
+        @include media(max, small) {margin-inline: auto}
         &:is(:hover, :focus) .images {mix-blend-mode: multiply;}
         .images {
           width: 100%;
@@ -115,14 +113,11 @@
   .contdown {
     gap: 2em;
     .contRestaurantList {
-      --max-size: 20em;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(clamp(15em, 20vw, var(--max-size)), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, clamp(18em, 20vw, 20em)), 1fr));
       grid-gap: 1em;
       @include media(max, medium) {grid-gap: 2em}
       .card {
-        max-width: var(--max-size);
-        @include media(max, 600px) {max-width: 100% !important};
         height: max-content;
         gap: clamp(0.5em, 1vw, 1em);
         border-radius: $border-card;
@@ -133,6 +128,7 @@
           cursor: pointer;
           height: 15em;
           overflow: hidden;
+          position: relative;
           .images {
             width: 100%;
             height: 100%;
@@ -142,6 +138,20 @@
               transform: scale(1.05);
             }
           }
+          .customeTooltip {
+            @include absolute(var(--x), var(--y));
+            transform: translate(10px, -20px);
+            background-color: $clr-btn;
+            color: #FFFFFF !important;
+            border-radius: 7px;
+            padding: .2em .8em;
+            opacity: 0;
+            text-align: end;
+            z-index: 1;
+            pointer-events: none;
+            transition: opacity .2s $ease;
+          }
+          &:hover .customeTooltip {opacity: 1}
         }
         .contcard {
           padding-inline: 2em;

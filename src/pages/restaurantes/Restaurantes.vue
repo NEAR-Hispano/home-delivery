@@ -78,14 +78,14 @@
         <h1 class="h7_em">{{$t('restaurantes')}}</h1>
       </aside>
       <section class="contRestaurantList">
-        <v-card v-for="(item,i) in dataRestaurant" :key="i"
+        <v-card v-for="(item,i) in dataRestaurant" :key="i" :style="WidthListener"
           class="card divcol" v-ripple="activeRipple?{class: 'activeRipple'}:''">
-          <img class="images" :src="item.img" alt="Restaurant image">
+          <img class="images" :src="item.logo" alt="Restaurant image">
 
           <aside class="contcard space">
             <a class="h10_em bold" @click="ToTienda(item)"
               @mouseover="activeRipple=true" @mouseleave="activeRipple=false">
-              {{item.title}}
+              {{item.name}}
             </a>
             <span class="normal tnone tend">{{item.hours}}</span>
           </aside>
@@ -96,6 +96,9 @@
 </template>
 
 <script>
+import * as nearAPI from "near-api-js";
+import { CONFIG } from "@/services/api";
+const { connect, keyStores, WalletConnection, Contract } = nearAPI;
 export default {
   name: "restaurantes",
   i18n: require("./i18n"),
@@ -107,31 +110,41 @@ export default {
         filterExcluir: [],
         filterIncluir: [],
       },
-      dataRestaurant: [
-        {
-          img: require("@/assets/test.jpg"),
-          title: "titulo",
-          hours: "horario",
-        },
-        {
-          img: require("@/assets/test.jpg"),
-          title: "titulo",
-          hours: "horario",
-        },
-        {
-          img: require("@/assets/test.jpg"),
-          title: "titulo",
-          hours: "horario",
-        },
-        {
-          img: require("@/assets/test.jpg"),
-          title: "titulo",
-          hours: "horario",
-        },
-      ]
+      dataRestaurant: []
+    }
+  },
+  mounted() {
+    this.get_all_stores()
+  },
+  computed: {
+    WidthListener() {
+      if (this.dataRestaurant.length <= 3) {return 'max-width: 20em'}
     }
   },
   methods: {
+        async get_all_stores() {
+      try {
+        const CONTRACT_NAME = 'contract1.ccoronel7.testnet'
+        // Connect to NEAR
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
+        // Create wallet connection
+        const wallet = new WalletConnection(near)
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          viewMethods: ['get_all_stores'],
+          sender: wallet.account()
+        })
+        if (wallet.isSignedIn()) {
+          await contract.get_all_stores({
+          }).then((res) => {
+            console.log(res)
+            this.dataRestaurant = res
+          })
+        }
+      } catch (e) {
+        // Router
+        console.log(e)
+      }
+    },
     ToTienda(item) {
       console.log(item)
       this.$router.push({path: '/restaurante-tienda'})

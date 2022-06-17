@@ -109,7 +109,7 @@
             </v-expansion-panel-content>
           </v-expansion-panel>
         </template>
-        
+
         <!-- list -->
         <template v-if="dataMenuLogout.list">
           <v-list class="intoExpansion">
@@ -123,14 +123,107 @@
         </template>
       </v-expansion-panels>
     </v-menu>
+
+    <v-dialog
+      v-model="modalShopCart"
+      max-width="min(100%, 60em)"
+      scrollable
+    >
+      <v-card id="modalShopCart" class="divcol jspace">
+        <v-btn icon class="close" @click.stop="modalShopCart=false">
+          <v-icon>mdi-close-circle-outline</v-icon>
+        </v-btn>
+
+        <v-window v-model="ventanaTiendas">
+          <v-window-item v-for="(item,i) in dataModalShopCart" :key="`card-${i}`"
+            class="padd1block relative">
+            <section class="center">
+              <h1 class="h7_em">{{item.user}}</h1>
+            </section>
+
+            <section class="contentModal grid">
+              <section class="contInformacion divcol gap1">
+                <span class="h10_em bold" style="text-indent:24px;">{{$t('informacionPedido')}}</span>
+                <ul class="divcol gap1">
+                  <v-card v-for="(item2,i) in item.pedido" :key="i" v-ripple="{class: 'activeRipple'}"
+                    class="grid" :style="`--numeration: '${i+1}-'`" :ripple="true">
+                    <span class="h11_em semibold"><span class="titulo">Orden: </span>{{item2.orden}}</span>
+                    <div class="divcol">
+                      <div class="divrow acenter" style="gap:.2em">
+                        <span class="h11_em semibold"><span class="titulo">Precio: </span>{{item2.precio}}</span>
+                        <img src="@/assets/logos/near.svg" width="14px" alt="near">
+                      </div>
+                      <span class="h11_em semibold"><span class="titulo">Comentario: </span>{{item2.comentario}}</span>
+                    </div>
+                    <v-btn icon class="cancelBtn not_clr">
+                      <img src="@/assets/icons/eliminar.svg" alt="cancel order">
+                    </v-btn>
+                  </v-card>
+                </ul>
+              </section>
+
+              <aside class="contRightPanel">
+                <section class="divcol">
+                  <span class="h10_em bold">{{$t('precioPedido')}}</span>
+                  <aside class="divcol" style="gap:.2em">
+                    <span class="h11_em semibold acenter" style="gap:.2em">
+                      <span class="titulo">Precio de Delivery: </span>
+                      {{item.precio.delivery}}
+                      <img src="@/assets/logos/near.svg" width="14px" alt="near">
+                      </span>
+                    <span class="h11_em semibold acenter" style="gap:.2em">
+                      <span class="titulo">Total del Pedido: </span>
+                      {{item.precio.total}}
+                      <img src="@/assets/logos/near.svg" width="14px" alt="near">
+                    </span>
+                  </aside>
+                  <v-btn class="botones2 align maxsize_w margin1top">
+                    Aceptar
+                  </v-btn>
+                </section>
+
+                <section class="divcol">
+                  <span class="h10_em bold">{{$t('direccionEntrega')}}</span>
+                  <aside class="divcol" style="gap:.2em">
+                    <GoogleMap :UserCoordinates="item.entrega.coordinates"
+                      style="width:100%;height:150px"></GoogleMap>
+
+                    <span class="h11_em semibold">
+                      <span class="titulo">Dirección: </span>
+                      {{item.entrega.direccion}}
+                    </span>
+                    <span class="h11_em semibold">
+                      <span class="titulo">Número: </span>
+                      {{item.entrega.numero}}
+                    </span>
+                  </aside>
+                </section>
+              </aside>
+            </section>
+          </v-window-item>
+        </v-window>
+
+        <v-card-actions class="center">
+          <v-item-group v-model="ventanaTiendas" mandatory>
+            <v-item v-for="n in dataModalShopCart.length" :key="`btn-${n}`" v-slot="{ active, toggle }">
+              <v-btn :input-value="active" icon @click="toggle" :class="active?'':'not_clr'">
+                <v-icon>mdi-record</v-icon>
+              </v-btn>
+            </v-item>
+          </v-item-group>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </section>
 </template>
 
 <script>
 import { i18n } from "@/plugins/i18n";
+import GoogleMap from '@/components/googleMaps/GoogleMap'
 export default {
   name: "headerMenu",
   i18n: require("./i18n"),
+  components: { GoogleMap },
   // created() {
   //   this.element = document.getElementById("theme");
   //   const theme = localStorage.getItem("theme");
@@ -143,6 +236,8 @@ export default {
   },
   data() {
     return {
+      modalShopCart: false,
+      ventanaTiendas: 0,
       logout: false,
       optionMenu: false,
       messages: 1,
@@ -175,6 +270,55 @@ export default {
           { key: "logout" }
         ]
       },
+      dataModalShopCart: [
+        {
+          user: "juanito's shop",
+          pedido: [
+            {
+              orden: "papitas fritas con refresco, dos raciones de pollo y ensalada",
+              precio: 4,
+              comentario: "ensalada sin cebolla",
+            },
+            {
+              orden: "papitas fritas con refresco, dos raciones de pollo y ensalada",
+              precio: 4,
+              comentario: "ensalada sin cebolla",
+            },
+            {
+              orden: "papitas fritas con refresco, dos raciones de pollo y ensalada",
+              precio: 4,
+              comentario: "ensalada sin cebolla",
+            },
+            {
+              orden: "papitas fritas con refresco, dos raciones de pollo y ensalada",
+              precio: 4,
+              comentario: "ensalada sin cebolla",
+            },
+          ],
+          precio:{delivery: 0.5, total: 8.5},
+          entrega: {
+            direccion: "virgen de guadalupe, las rosas",
+            coordinates: { lat:9.988903846136667, lng:-67.6891094161248 },
+            numero: "0414-4137640",
+          },
+        },
+        {
+          user: "pedrito's shop",
+          pedido: [
+            {
+              orden: "sucaritas vida y mas na",
+              precio: 2,
+              comentario: "ninguno",
+            },
+          ],
+          precio:{delivery: 0.5, total: 2.5},
+          entrega: {
+            direccion: "las carmencitas, hoyuelos",
+            coordinates: { lat:9.988903846136667, lng:-67.6891094161248 },
+            numero: "0414-4137640",
+          },
+        },
+      ]
     };
   },
   methods: {

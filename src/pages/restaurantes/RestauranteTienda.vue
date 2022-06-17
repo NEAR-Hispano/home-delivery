@@ -106,10 +106,11 @@
       </aside>
 
       <section class="contRestaurantList">
-        <v-card v-for="(item,i) in dataMenuRestaurant" :key="i"
-          class="card divcol align" v-ripple="activeRipple?{class: 'activeRipple'}:''">
+        <v-card v-for="(item,i) in dataMenuRestaurant" :key="i" :style="WidthListener"
+          class="card divcol" v-ripple="activeRipple?{class: 'activeRipple'}:''">
           <div class="contImages" @click="SelectMenu(item)"
             @mouseover="activeRipple=true" @mouseleave="activeRipple=false">
+            <span class="customeTooltip h12_em not_clr">Agregar al carrito</span>
             <img class="images" :src="item.img" alt="Restaurant image">
           </div>
 
@@ -119,7 +120,7 @@
             <div class="contPrice divcol tend">
               <div class="acenter">
                 <img class="logoNear" src="@/assets/logos/near.svg" alt="near">
-                <span class="price normal">{{item.near}}</span>
+                <span class="price normal">{{item.price}}</span>
               </div>
               <span class="not_clr">(${{item.dollar}})</span>
             </div>
@@ -137,7 +138,16 @@ export default {
   components: { GoogleMap },
   i18n: require("./i18n"),
   mounted() {
-    this.$refs.map.userCoordinates = this.perfil.location.coordinates
+    this.$refs.map.userCoordinates = this.perfil.location.coordinates;
+    const el = document.querySelectorAll('.contImages');
+    el.forEach(element => {
+      element.addEventListener('mousemove', (e)=>{
+        var x = e.offsetX;
+        var y = e.offsetY;
+        element.style.setProperty('--x', `${x}px`)
+        element.style.setProperty('--y', `${y}px`)
+      });
+    });
   },
   data() {
     return {
@@ -157,29 +167,32 @@ export default {
         {
           img: require("@/assets/test.jpg"),
           desc: "descripcion",
-          near: "1",
-          dollar: "23"
+          price: 1,
+          dollar: 23
         },
         {
           img: require("@/assets/test.jpg"),
           desc: "descripcion",
-          near: "1",
-          dollar: "23"
+          price: 1,
+          dollar: 23
         },
         {
           img: require("@/assets/test.jpg"),
           desc: "descripcion",
-          near: "1",
-          dollar: "23"
+          price: 1,
+          dollar: 23
         },
         {
           img: require("@/assets/test.jpg"),
           desc: "descripcion",
-          near: "1",
-          dollar: "23"
+          price: 1,
+          dollar: 23
         },
       ]
     }
+  },
+  computed: {
+    WidthListener() {if (this.dataMenuRestaurant.length <= 3) {return 'max-width: 20em'}}
   },
   methods: {
     // al hacer click en el menu

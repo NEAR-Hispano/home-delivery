@@ -9,7 +9,7 @@
 
     <GmapMap
       ref="mapRef"
-      :center="userCoordinates"
+      :center="UserCoordinates"
       :zoom="14"
       :options="{
         key: 'AIzaSyB8dExdQtd6WILpKT57uF2boPp8VyCIufk',
@@ -39,19 +39,23 @@
             @click="item.ifw=!item.ifw"
             @dragend="mapClicked">
             <gmap-info-window :opened="item.ifw">
-              <div class="grid" style="grid-template-columns:repeat(2,1fr); gap:0 1em">
-                <h4>latitud</h4>
-                <h4>Longitud</h4>
-                <span>{{item.ifw2latText}}</span>
-                <span>{{item.ifw2lngText}}</span>
-              </div>
+              <section class="marker jcenter">
+                <div class="divcol">
+                  <h4>latitud</h4>
+                  <span>{{item.ifw2latText}}</span>
+                </div>
+                <div class="divcol">
+                  <h4>Longitud</h4>
+                  <span>{{item.ifw2lngText}}</span>
+                </div>
+              </section>
             </gmap-info-window>
           </gmap-marker>
         </template>
       </gmap-cluster>
 
       <gmap-custom-marker
-        :marker="userCoordinates"
+        :marker="UserCoordinates"
         @click.native="someFunction()"
       >
         <img class="localImg" src="@/assets/logos/logo.svg" />
@@ -65,12 +69,12 @@ import GmapCustomMarker from 'vue2-gmap-custom-marker';
 export default {
   name: "googleMap",
   components: { 'gmap-custom-marker': GmapCustomMarker },
+  props: { UserCoordinates: Object },
   data() {
     return {
       // map
       map: null,
       myCoordinates: {},
-      userCoordinates: {},
       //markers
       PositionMarker: [],
       lastId: 1,
@@ -102,7 +106,7 @@ export default {
   },
   mounted() {
     //add the map to a data object
-    this.$refs.mapRef.$mapPromise.then(map => this.map = map);
+    // this.$refs.mapRef.$mapPromise.then(map => this.map = map);
     // hide and show search
     const item = document.querySelector('.inputGoogleSearch');
     item.addEventListener('click', ()=>{item.classList.add('active')})
@@ -134,7 +138,6 @@ export default {
         ifw: true,
         ifw2latText: mouseArgs.latLng.lat(),
         ifw2lngText: mouseArgs.latLng.lng(),
-        direccion: "direccion creada al azar"
       });
     },
     update(field, event) {

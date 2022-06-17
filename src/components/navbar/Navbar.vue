@@ -125,14 +125,15 @@ export default {
           item.icon = icon2Active
           this.$router.push('/restaurantes')
         }
-      } else if (item.key == 'tienda' || item == 'tienda') {
+      } else if (item.key == 'tienda' || item == 'tienda' || item == 'miMenu') {
         // if external or internal navbar call
-        if (item == "tienda") {
+        if (item == "tienda" || item == 'miMenu') {
           const index = this.dataNavbar[this.dataNavbar.findIndex(data => data.key == 'tienda')]
           index.active = true;
           index.icon = icon3Active;
             // push select
-            if (item == "tienda"&&route!=='tienda') {this.$router.push('/tienda')}
+            if (item == "tienda"&&route!=='tienda'
+            || item == "miMenu"&&route!=='miMenu') {this.$router.push('/tienda')}
         } else {
           item.active = true;
           item.icon = icon3Active

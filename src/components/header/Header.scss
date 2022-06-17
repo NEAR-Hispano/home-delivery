@@ -101,3 +101,78 @@
     }
   }
 }
+
+//////////////////////////////////////////////////////////////////////
+// // // modal shop cart // // //
+//////////////////////////////////////////////////////////////////////
+#modalShopCart {
+  padding-top: 1em;
+  @include media(max, small) {padding-top: 2em}
+  .contentModal {
+    overflow-y: scroll;
+    min-height: 450px;
+    max-height: 550px;
+    @include media(max, small) {max-height: 80vh}
+    .titulo {color: $clr-btn-2 !important; font-weight: 700}
+    @include media(min, small) {grid-template-columns: 70% 1fr}
+    section.divcol  {padding:.5em; padding-right: .8em}
+    .contInformacion {
+      grid-row: span 2;
+      position: relative !important;
+      .grid {
+        grid-template-columns: repeat(2, 1fr) 30px;
+        grid-gap: 0em 1em;
+        position: relative;
+        align-items: center;
+        background-color: hsl(0, 40%, 97%);
+        border-radius: $border-btn;
+        padding: .2em;
+        &::before {
+          content: var(--numeration);
+          color: $clr-btn;
+          font-weight: 800;
+          @include absolute(-24px, 50%);
+          transform: translateY(-50%);
+        }
+        .cancelBtn {
+          background-color: $warning !important;
+          width: max-content;
+          height: max-content;
+          padding: .13em;
+          img {width: 30px;font-size: $font-size-header;}
+        }
+      }
+      span:first-child {grid-row: span 2}
+      &::after {
+        content: "";
+        background-color: #3A383F;
+        @include absolute(auto,0,0,0);
+        width: 2px;
+        height: 90%;
+        @include media(max, small) {
+          @include absolute(0,auto,0,0);
+          width: 90%;
+          height: 2px;
+        }
+      }
+    }
+    .contRightPanel {
+      @include media(min, small) {
+        @include absolute(auto,0,0,0);
+        max-width: 30%;
+        display: grid;
+        place-content: center;
+      }
+      section+section {
+        position: relative !important;
+        &::after {
+          content: "";
+          @include absolute(0,0,0,auto);
+          background-color: #3A383F;
+          width: 90%;
+          height: 2px;
+        }
+      }
+    }
+  }
+}

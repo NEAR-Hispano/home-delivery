@@ -8,7 +8,7 @@
       class="floatingButton"
       overlap
     >
-      <v-btn icon @click="$store.dispatch('DrawerChats', {key: 'open'})">
+      <v-btn icon @click="openDrawer()">
         <v-icon color="#FFFFFF !important">mdi-chat</v-icon>
       </v-btn>
     </v-badge>
@@ -108,6 +108,7 @@ export default {
       messagesLoaded: false,
       messages: [],
       intervalo: null,
+      room_id: null,
     }
   },
   mounted () {
@@ -116,6 +117,10 @@ export default {
     this.initChatComponent()
   },
   methods: {
+    openDrawer () {
+      this.$store.dispatch('DrawerChats', {key: 'open'})
+      this.fetchChats(localStorage.getItem('profileid'))
+    },
     initChatComponent(){
       this.fetchChats(localStorage.getItem('profileid'))
       // this.intervalo = setInterval(()=>{
@@ -136,15 +141,10 @@ export default {
       this.roomsLoaded = true
       // vue-advanced-chat component is performance oriented, hence you have to follow specific rules to make it work properly
       const habs = []; // El componente necesita igualar un array lleno con la variable de las rooms
-      this.axios.get(CHATS).then((res) => {
-        // console.log(res.status.charAt(0))
-        if (res.status !== 200) {
-        } else {
-          console.log(res.status)
-          res.data.forEach((element) => {
-            habs.push(element);
-          })
-        }
+      this.axios.get(CHATS+'?id='+e+'&').then((res) => {
+        res.data.forEach((element) => {
+          habs.push(element);
+        })
         this.rooms = habs
         this.esperando = false
         this.roomsLoaded = false
@@ -152,19 +152,22 @@ export default {
     },
     handleMessage(data){
       this.esperando = true
-      this.axios.post(MESSAGES,{content:data.content,replyMessage:data.replyMessage,roomId:data.roomId,usuario:1}).then((res) => {
+      var msgs = this.messages
+      this.axios.post(MESSAGES,{content:data.content,replyMessage:data.replyMessage,roomId:data.roomId,usuario:localStorage.getItem('profileid')}).then((res) => {
+        console.log(res)
         if (res.status !== 201) {
           console.log(res)
         } else {
-          this.$refs.noir.fetch-messages
+          msgs.push(res.data)
+          this.messages = msgs
           this.esperando = false
         }
       }).catch((e)=>console.log(e))
     },
-    fetchMessages({ room, options }) {
-      console.log('refs')
+    fetchMessages(data) {
+      console.log(data)
       var msgs = []
-      this.axios.get(MESSAGES).then((res) => {
+      this.axios.get(MESSAGES+'?chat='+data.room.roomId+'&').then((res) => {
         res.data.forEach((element) => {
           msgs.push(element);
         });

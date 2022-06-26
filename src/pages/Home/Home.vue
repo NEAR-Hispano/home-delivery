@@ -73,18 +73,16 @@
                     <v-col class="contslides relative divcol paddlateral" :key="i">
                       <aside class="contLike">
                         <v-btn icon class="contimg center absolute not_clr"
-                          :class="{ contIconActive: sliderRestaurant[+index + i].like,
-                            BorderContIconActive: sliderRestaurant[+index + i].like }"
-                            @click="SelectLikeRestaurant(sliderRestaurant[+index + i])">
-                          <img :src="sliderRestaurant[+index + i].icon" alt="Food icon">
-                          <div class="square" />
+                          :class="{ contIconActive: sliderRestaurant[+index + i].like }"
+                          @click="sliderRestaurant[+index + i].like = !sliderRestaurant[+index + i].like">
+                          <img :src="require(`@/assets/icons/corazon${sliderRestaurant[+index + i].like==true?'':'-outline'}.svg`)" alt="Food icon">
                         </v-btn>
                       </aside>
 
                       <img class="images" :src="sliderRestaurant[+index + i].img" alt="Restaurant image">
 
                       <aside class="divcol" style="padding-inline: 1em">
-                        <a :href="sliderRestaurant[+index + i].to" class="h10_em bold">{{sliderRestaurant[+index + i].title }}</a>
+                        <a @click="$router.push(sliderRestaurant[+index + i].to)" class="h10_em bold">{{sliderRestaurant[+index + i].title }}</a>
                         <p class="h11_em semibold p">{{sliderRestaurant[+index + i].desc }}</p>
                       </aside>
                     </v-col>
@@ -118,75 +116,67 @@ export default {
       sliderRestaurant: [
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "Nodoo",
           desc: "Asiático // Ramen",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La casa de Lola",
           desc: "Comida Mediterránea",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
+          icon: "-outline",
           like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          to: "/"
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r1.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r2.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
         {
           img: require("@/assets/images/r3.png"),
-          icon: require("@/assets/icons/corazon-outline.svg"),
-          like: false,
           title: "La Tagliatella",
           desc: "Especialidad en pasta",
-          to: "#"
+          like: false,
+          to: "/"
         },
       ]
     }
@@ -205,11 +195,6 @@ export default {
       if (item == "next") {this.carouselRestaurant++}
       if (item == "prev") {this.carouselRestaurant--}
     },
-    SelectLikeRestaurant(item) {
-      item.like = !item.like
-      if (item.like == true) {item.icon = require("@/assets/icons/corazon.svg")}
-      else {item.icon = require("@/assets/icons/corazon-outline.svg")}
-    }
   },
 };
 </script>

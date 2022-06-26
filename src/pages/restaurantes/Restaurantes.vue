@@ -122,7 +122,7 @@ export default {
     }
   },
   methods: {
-        async get_all_stores() {
+    async get_all_stores() {
       try {
         const CONTRACT_NAME = 'contract1.ccoronel7.testnet'
         // Connect to NEAR

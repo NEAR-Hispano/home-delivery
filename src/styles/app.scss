@@ -287,15 +287,39 @@ p:not(.not_typography, .not) {
     background-color: var(--clr-btn);
   }
 }
-.contIconActive {
-  background-color: var(--clr-btn) !important;
-  .square {
-    background: var(--clr-btn) !important;
-  }
-  span {
-    color: var(--clr-text-btn) !important;
+
+.contLike {
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  z-index: 10;
+  --size: clamp(3.5em, 4vw, 4em);
+  .contimg {
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    border: 3px solid #6B6B6B;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      width: calc(var(--size) - clamp(2em, 2.46vw, 2.46em));
+      aspect-ratio: 1/1;
+      background: var(--clr-btn-inv);
+      border-radius: $border-btn;
+      z-index: 0;
+      inset: 11%;
+    }
+    img {
+      width: calc(var(--size) - clamp(1.6em, 1.7vw, 1.77em));
+      z-index: 1;
+    }
   }
 }
-.BorderContIconActive {
+.contIconActive {
+  background-color: var(--clr-btn) !important;
   border: 3px solid #ffffff !important;
+  &::after {display: none !important}
+  span {color: var(--clr-text-btn) !important}
 }

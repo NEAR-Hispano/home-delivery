@@ -2,7 +2,7 @@
   <section id="miTienda" class="parentForm section">
     <Alerts ref="alerts"></Alerts>
     <MenuForms ref="menu"
-      @getDirection="(direccion,coordinates)=>{perfil.direccion=direccion; perfil.location=coordinates}"
+      @getDirection="(direccion,coordinates)=>{store.address=direccion; store.location=coordinates}"
     ></MenuForms>
     <v-col class="contmiperfil divcol gap2">
       <aside class="contup divrow">
@@ -28,14 +28,13 @@
             Dirección
           </label>
 
-          <v-sheet color="transparent" style="cursor:pointer" @click="$refs.menu.modalDirection=true">
+          <!-- <v-sheet color="transparent" style="cursor:pointer" @click="$refs.menu.modalDirection=true"> -->
             <v-text-field
               v-model="store.address"
               solo
-              disabled
               hide-details
             ></v-text-field>
-          </v-sheet>
+          <!-- </v-sheet> -->
         </v-card>
         <v-card color="transparent">
           <label for="telefono" class="h10_em"> Teléfono </label>
@@ -134,7 +133,7 @@ export default {
         if (wallet.isSignedIn()) {
           await contract
             .put_store({
-              user_id: wallet.getAccountId(),
+              owner_id: wallet.getAccountId(),
               name: this.store.name,
               address: this.store.address,
               phone: this.store.phone,
@@ -170,7 +169,7 @@ export default {
           await this.axios.post(IPFS, formData).then((res) => {
             contract
               .set_store({
-                user_id: wallet.getAccountId(),
+                owner_id: wallet.getAccountId(),
                 name: this.store.name,
                 address: this.store.address,
                 phone: this.store.phone,

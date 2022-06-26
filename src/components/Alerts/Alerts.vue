@@ -17,7 +17,7 @@
       <aside class="alert-content divcol">
         <div class="divrow acenter">
           <v-icon :style="`color: ${item.color} !important`" size="2.5rem">{{ item.icon }}</v-icon>
-          <h3 class="h8_em p bold" :style="`color: ${item.color} !important`">{{ $t(item.key) }}</h3>
+          <h3 class="h8_em p bold" :style="`color: ${item.color} !important`">{{ $t(item.title) }}</h3>
         </div>
 
         <span class="h11_em semibold">{{ $t(item.desc) }}</span>
@@ -36,6 +36,7 @@ export default {
       dataAlerts: [
         {
           key: "success",
+          title: "success",
           desc: "textSuccess",
           icon: "mdi-check-circle",
           color: "#A4FDDF",
@@ -43,6 +44,7 @@ export default {
         },
         {
           key: "cancel",
+          title: "cancel",
           desc: "textCancel",
           icon: "mdi-close-circle",
           color: "rgb(200, 0, 0)",
@@ -52,9 +54,15 @@ export default {
     };
   },
   methods: {
-    Alerts(key) {
+    // Alerts(key) {
+    //   const index = this.dataAlerts.findIndex(data=>data.key==key);
+    //   this.dataAlerts[index].model = true
+    // },
+    Alerts(key, title, desc) {
       const index = this.dataAlerts.findIndex(data=>data.key==key);
       this.dataAlerts[index].model = true
+      if (title) {this.dataAlerts[index].title=title}
+      if (desc) {this.dataAlerts[index].desc=desc}
     },
   }
 };

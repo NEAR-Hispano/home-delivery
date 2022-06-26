@@ -12,6 +12,13 @@
               <v-icon class="not_clr">mdi-chevron-left</v-icon>
             </v-btn>
           </aside>
+          <aside class="contLike">
+            <button class="contimg center absolute not_clr"
+              :class="{ contIconActive: perfil.like }"
+              @click="perfil.like = !perfil.like">
+              <img :src="require(`@/assets/icons/corazon${perfil.like==true?'':'-outline'}.svg`)" alt="Food icon">
+            </button>
+          </aside>
           <span class="h11_em">horario</span>
 
           <v-card-title class="h6_em bold">
@@ -153,6 +160,7 @@ export default {
     return {
       activeRipple:false,
       perfil: {
+        like: false,
         location:{
           direccion: 'direccion del lugar',
           coordinates: { lat:9.988903846136667, lng:-67.6891094161248 }

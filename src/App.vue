@@ -15,7 +15,7 @@
         user: null,
       }
     },
-    beforeCreate(){this.isSigned()},
+    beforeCreate(){},
     created(){this.isSigned()},
     methods: {
       async isSigned() {

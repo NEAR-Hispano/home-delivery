@@ -96,6 +96,19 @@
         @include absolute(.5em,.5em);
         animation: moveleft .5s $ease-return;
       }
+      .contLike {
+        --size: clamp(2.5em, 2.7vw, 2.7em);
+        top: calc(.5em + 30px);
+        right: 10px;
+        .contimg {
+          &::after {
+            width: calc(var(--size) - 1.6em);
+            height: calc(var(--size) - 1.6em) !important;
+            inset: 10%;
+          }
+          img {width: 65% !important}
+        }
+      }
       span {
         @include absolute(auto, .5em, .5em);
         text-transform: lowercase !important;

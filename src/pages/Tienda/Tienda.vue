@@ -3,15 +3,12 @@
     <v-col class="contup astart">
       <section class="contbanner jspace">
         <v-img
-          src="@/assets/test.jpg"
+          :src="data.logo"
           class="white--text align-end scroll_h"
           gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
         >
-          <span class="h11_em">horario</span>
-          <span class="h11_em">telefono</span>
-
           <v-card-title class="h6_em bold anim_moveup">
-            nombre
+            {{data.name}}
             <v-tooltip right color="var(--clr-btn)">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="not_clr" icon v-bind="attrs" v-on="on" to="/mi-tienda" :ripple="false">
@@ -21,10 +18,6 @@
               <span class="clr_text_btn">Editar datos de tienda</span>
             </v-tooltip>
           </v-card-title>
-
-          <v-card-text class="h11_em anim_moveup">
-            descripcion
-          </v-card-text>
         </v-img>
 
         <aside class="contHistorial fill">
@@ -119,19 +112,19 @@
       <section class="contRestaurantList">
         <v-card v-for="(item,i) in dataMenuTienda" :key="i" class="card divcol" :style="WidthListener">
           <div class="contImages">
-            <label class="h9_em">{{ item.nombre }}</label>
+            <label class="h9_em">{{ item.name }}</label>
             <img class="images" :src="item.img" alt="Restaurant image">
           </div>
 
           <aside class="contcard space">
-            <p class="h10_em semibold">{{item.desc}}</p>
+            <p class="h10_em semibold">{{item.description}}</p>
 
             <div class="contPrice divcol tend">
               <div class="acenter">
                 <img class="logoNear" src="@/assets/logos/near.svg" alt="near">
-                <span class="price normal">{{formatPrice(item.near)}}</span>
+                <span class="price normal">{{formatPrice(item.price)}}</span>
               </div>
-              <span class="not_clr">(${{item.price}})</span>
+              <!-- <span class="not_clr">(${{item.price}})</span> -->
             </div>
           </aside>
         </v-card>
@@ -166,7 +159,7 @@ export default {
     }
   },
   mounted() {
-    // this.VerifyStore()
+    this.VerifyStore()
     this.get_menu();
   },
   computed: {
@@ -227,6 +220,7 @@ export default {
             .then((res) => {
               this.data = res;
               console.info(this.data);
+              localStorage.setItem("store", JSON.stringify(this.data));
             });
         }
       } catch (e) {

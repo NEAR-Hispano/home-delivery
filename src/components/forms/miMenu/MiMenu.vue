@@ -74,33 +74,30 @@
         </v-card>
       </aside>
 
-      <aside class="contSlide divcol">
+      <aside class="contListMenu divcol">
         <v-card
-          v-for="(item, i) in listmenu"
-          :key="i"
+          v-for="(item, i) in listmenu" :key="i"
           color="transparent"
-          class="space fill_w"
+          class="space"
           style="display: flex"
         >
-          <aside class="firstcont divrow">
+          <aside class="firstAside acenter gap1">
             <img class="foto" :src="item.img" alt="Menu Image" />
             <div class="child1 divcol jcenter">
-              <label class="h9_em">{{ item.nombre }}</label>
-              <span class="h9_em semibold">{{ item.categoria }}</span>
+              <label class="h9_em">{{ item.name }}</label>
+              <span class="h9_em semibold">{{ item.category }}</span>
               <div class="acenter gap1">
-                <span class="h10_em semibold center">{{ formatPrice(item.near) }} 
-                  <img src="@/assets/logos/near.svg" alt="near">
+                <span class="h10_em semibold center">{{ formatPrice(item.price) }} 
+                  <img class="near" src="@/assets/logos/near.svg" alt="near">
                 </span>
-                <span class="h10_em clr_label_2">(${{ item.price }})</span>
+                <span class="h10_em clr_label_2">(${{ item.dollar }})</span>
               </div>
             </div>
           </aside>
 
-          <aside class="contdesc">
-            <p class="h10_em semibold p">{{ item.desc }}</p>
-          </aside>
+          <p class="h10_em semibold p tcentermobile">{{ item.description }}</p>
 
-          <aside class="controls acenter spacee" style="gap: 0.5em">
+          <aside class="controls divcol acenter spacee" style="gap: 0.5em">
             <v-tooltip bottom color="var(--clr-btn)">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="add" icon v-bind="attrs" v-on="on">
@@ -147,24 +144,24 @@ export default {
       menu: {},
       walletid: null,
       foto: false,
-      dataSlideMenu: [
-        {
-          img: require("@/assets/icons/inicio.svg"),
-          nombre: "LUMPIAS CON QUESO",
-          categoria: "Chino",
-          dollar: 80,
-          near: 3,
-          desc: "rico platillo para toda la familia pues",
-        },
-        {
-          img: require("@/assets/icons/inicio.svg"),
-          nombre: "HAMBURGUESAS TIRPLE CARNE",
-          categoria: "Fritura",
-          dollar: 50,
-          near: 2,
-          desc: "compra y lleva ahora 20% de descuenta para ¿, oferta limitada",
-        },
-      ],
+      // dataSlideMenu: [
+      //   {
+      //     img: require("@/assets/icons/inicio.svg"),
+      //     nombre: "LUMPIAS CON QUESO",
+      //     categoria: "Chino",
+      //     dollar: 80,
+      //     near: 3,
+      //     desc: "rico platillo para toda la familia pues",
+      //   },
+      //   {
+      //     img: require("@/assets/icons/inicio.svg"),
+      //     nombre: "HAMBURGUESAS TIRPLE CARNE",
+      //     categoria: "Fritura",
+      //     dollar: 50,
+      //     near: 2,
+      //     desc: "compra y lleva ahora 20% de descuenta para ¿, oferta limitada",
+      //   },
+      // ],
     };
   },
   mounted() {

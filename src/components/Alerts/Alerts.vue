@@ -33,36 +33,57 @@ export default {
   data() {
     return {
       alert: true,
-      dataAlerts: [
-        {
-          key: "success",
-          title: "success",
-          desc: "textSuccess",
-          icon: "mdi-check-circle",
-          color: "#A4FDDF",
-          model: false,
-        },
-        {
-          key: "cancel",
-          title: "cancel",
-          desc: "textCancel",
-          icon: "mdi-close-circle",
-          color: "rgb(200, 0, 0)",
-          model: false,
-        }
-      ]
+      dataAlerts: []
     };
   },
   methods: {
-    // Alerts(key) {
-    //   const index = this.dataAlerts.findIndex(data=>data.key==key);
-    //   this.dataAlerts[index].model = true
-    // },
+    ClearAlerts() {this.dataAlerts=[]},
     Alerts(key, title, desc) {
-      const index = this.dataAlerts.findIndex(data=>data.key==key);
-      this.dataAlerts[index].model = true
-      if (title) {this.dataAlerts[index].title=title}
-      if (desc) {this.dataAlerts[index].desc=desc}
+
+      // clear alerts
+      setTimeout(() => {
+        this.ClearAlerts()
+      }, 5000);
+
+      // create alert
+      if (title&&desc) {
+        var alert = {
+          key: key,
+          title: title,
+          desc: desc,
+          icon: key=='success'?'mdi-check-circle':key=='cancel'?'mdi-close-circle':null,
+          color: key=='success'?'#A4FDDF':key=='cancel'?'rgb(200, 0, 0)':null,
+          model: true,
+        }
+      } else if (title) {
+        var alert = {
+          key: key,
+          title: title,
+          desc: `text${key.replace(/^\w/, (c) => c.toUpperCase())}`,
+          icon: key=='success'?'mdi-check-circle':key=='cancel'?'mdi-close-circle':null,
+          color: key=='success'?'#A4FDDF':key=='cancel'?'rgb(200, 0, 0)':null,
+          model: true,
+        }
+      } else if (desc) {
+        var alert = {
+          key: key,
+          title: key,
+          desc: desc,
+          icon: key=='success'?'mdi-check-circle':key=='cancel'?'mdi-close-circle':null,
+          color: key=='success'?'#A4FDDF':key=='cancel'?'rgb(200, 0, 0)':null,
+          model: true,
+        }
+      } else {
+        var alert = {
+          key: key,
+          title: key,
+          desc: `text${key.replace(/^\w/, (c) => c.toUpperCase())}`,
+          icon: key=='success'?'mdi-check-circle':key=='cancel'?'mdi-close-circle':null,
+          color: key=='success'?'#A4FDDF':key=='cancel'?'rgb(200, 0, 0)':null,
+          model: true,
+        }
+      }
+      this.dataAlerts.push(alert)
     },
   }
 };

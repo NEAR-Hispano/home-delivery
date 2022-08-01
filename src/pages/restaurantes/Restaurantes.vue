@@ -2,7 +2,7 @@
   <section id="restaurantes" class="parent relative">
     <v-col class="contup relative divcol">
       <h1 class="h7_em vermobile">{{$t('restaurantes')}}</h1>
-      <aside class="contFilters divwrap acenter">
+      <!-- <aside class="contFilters divwrap acenter">
         <v-btn text class="searchBtn semibold">
           {{$t('filtrar')}}
         </v-btn>
@@ -70,7 +70,7 @@
             </span>
           </template>
         </v-select>
-      </aside>
+      </aside> -->
     </v-col>
 
     <v-col class="contdown">
@@ -84,7 +84,7 @@
 
           <aside class="contcard space">
             <a class="h10_em bold" @click="ToTienda(item)"
-              @mouseover="activeRipple=true" @mouseleave="activeRipple=false">
+              @mouseover="activeRipple=true" @mouseleave="activeRipple=false" >
               {{item.name}}
             </a>
             <span class="normal tnone tend">{{item.hours}}</span>
@@ -133,21 +133,21 @@ export default {
           viewMethods: ['get_all_stores'],
           sender: wallet.account()
         })
-        if (wallet.isSignedIn()) {
+
           await contract.get_all_stores({
           }).then((res) => {
-            console.log(res)
+            // console.log(res)
             this.dataRestaurant = res
           })
-        }
       } catch (e) {
         // Router
         console.log(e)
       }
     },
     ToTienda(item) {
-      console.log(item)
-      this.$router.push({path: '/restaurante-tienda'})
+      // console.log(item)
+      this.$store.commit("get_owner", item.owner_id)
+        this.$router.push({path: '/restaurante-tienda'})
     }
   },
 };

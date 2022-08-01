@@ -7,14 +7,17 @@
   height: 100%;
   >*:not(.vue-map-container) {z-index: 2}
   .searchIcon {
-    --distance: 2em;
-    @include absolute(var(--distance),var(--distance));
+    --distance: 27px;
+    position: absolute;
+    left: var(--distance);
+    top: var(--distance);
+    margin: auto;
     background-color: var(--clr-card-2);
     z-index: 3 !important;
     pointer-events: none;
   }
   .inputGoogleSearch {
-    --distance: 1.3em;
+    --distance: 20px;
     --hideSize: 50px;
     @include absolute(var(--distance),var(--distance));
     width: var(--hideSize);
@@ -26,6 +29,7 @@
     z-index: 2;
     transition: .5s $ease-return;
     padding-inline: 1em;
+    outline: none !important;
     &.active {width: min(60%,20em); padding-inline: 3em 1em;}
   }
   // prefers default into map //

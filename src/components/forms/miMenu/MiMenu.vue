@@ -98,19 +98,19 @@
           <p class="h10_em semibold p tcentermobile">{{ item.description }}</p>
 
           <aside class="controls divcol acenter spacee" style="gap: 0.5em">
-            <v-tooltip bottom color="var(--clr-btn)">
+            <!-- <v-tooltip bottom color="var(--clr-btn)">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn class="add" icon v-bind="attrs" v-on="on">
                   <img src="@/assets/icons/pencil.svg" alt="Add Menu" />
                 </v-btn>
               </template>
               <span class="clr_text_btn">Editar</span>
-            </v-tooltip>
+            </v-tooltip> -->
 
             <v-tooltip bottom color="#ff4081">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn icon v-bind="attrs" v-on="on">
-                  <img src="@/assets/icons/eliminar.svg" alt="Add Menu" />
+                <v-btn @click="delete_menu(item.id)" icon v-bind="attrs" v-on="on">
+                  <img src="@/assets/icons/eliminar.svg"  />
                 </v-btn>
               </template>
               <span style="color: #ffffff !important">Eliminar</span>
@@ -189,7 +189,7 @@ export default {
         if (wallet.isSignedIn()) {
           await contract.get_category({
           }).then((res) => {
-            console.log(res)
+            // console.log(res)
             this.listCategoria = res
           })
         }
@@ -213,8 +213,33 @@ export default {
           await contract.get_menu({
             user_id: wallet.getAccountId()
           }).then((res) => {
-            console.log(res)
+            // console.log(res)
             this.listmenu = res.platillos
+            this.menu = {}
+          })
+        }
+      } catch (e) {
+        // Router
+        console.log(e)
+      }
+    },
+    async delete_menu(id) {
+      try {
+        const CONTRACT_NAME = 'contract1.ccoronel7.testnet'
+        // Connect to NEAR
+        const near = await connect(CONFIG(new keyStores.BrowserLocalStorageKeyStore()))
+        // Create wallet connection
+        const wallet = new WalletConnection(near)
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          changeMethods: ['delete_platillo'],
+          sender: wallet.account()
+        })
+        if (wallet.isSignedIn()) {
+          await contract.delete_platillo({
+            id: id
+          }).then((res) => {
+            this.$refs.alerts.Alerts('success');
+            this.get_menu()
           })
         }
       } catch (e) {
@@ -237,7 +262,7 @@ export default {
         })
         const formData = new FormData()
         formData.append('file', this.menu.img)
-        console.log(this.menu.img)
+        // console.log(this.menu.img)
         await this.axios.post(IPFS, formData).then((res) => {
   
           contract.set_platillo({
@@ -246,8 +271,14 @@ export default {
             description: this.menu.description,
             price: utils.format.parseNearAmount(String(this.menu.price)),
             category: this.menu.category
+          }).then((res) => {
+            this.$refs.alerts.Alerts("success", "Menu creado");
+            this.get_menu()
           })
-        })  },
+        })
+        
+
+},
     showAlert() {
       this.$refs.alerts.Alerts("success");
       this.$refs.alerts.Alerts("cancel");

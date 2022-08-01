@@ -32,7 +32,7 @@
   box-shadow: $sombra-card-2 !important;
   overflow-x: hidden;
   position: relative;
-  height: 40em;
+  height: min(100vh, 40em);
   @include media(max, small) {height: 90vh; margin-block: auto}
   .close {
     --distance: 1.5em;

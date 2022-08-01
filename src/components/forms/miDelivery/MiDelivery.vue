@@ -1,123 +1,59 @@
 <template>
   <section id="miTienda" class="parentForm section">
     <Alerts ref="alerts"></Alerts>
-    <MenuForms ref="menu"
-      @getDirection="(direccion,coordinates)=>{store.address=direccion; store.location=coordinates}"
-    ></MenuForms>
+    <MenuForms ref="menu"></MenuForms>
     <v-col class="contmiperfil divcol gap2">
       <aside class="contup divrow">
         <v-btn class="back" icon @click="$root.$children[0].$children[0].$children[0].$children[0].to('tienda')">
           <v-icon size="clamp(1.4em, 2.2vw, 2.2em)">mdi-arrow-left</v-icon>
         </v-btn>
         <div style="margin-left: 5mm" class="divcol">
-          <h1 class="h7_em">Mi Tienda</h1>
-          <h2 class="h9_em">Introduzca la información de la tienda</h2>
+          <h1 class="h7_em">Mi Delivery</h1>
+          <h2 class="h9_em">Introduzca la información del Delivery</h2>
         </div>
       </aside>
       <aside class="contdown">
         <v-card color="transparent">
-          <label for="walet" class="h10_em"> Nombre de la tienda </label>
-          <v-text-field id="wallet" v-model="store.name" solo></v-text-field>
+          <label for="type" class="h10_em"> Tipo de Vehículo </label>
+          <v-select id="type" v-model="store.type" :items="v_type" solo></v-select>
         </v-card>
+        
         <v-card color="transparent">
-          <label for="walet" class="h10_em"> Wallet de la tienda </label>
-          <v-text-field id="wallet" v-model="store.wallet" solo></v-text-field>
+          <label for="mark" class="h10_em">Marca del vehículo</label>
+          <v-text-field id="mark" v-model="store.mark" solo></v-text-field>
         </v-card>
+        
         <v-card color="transparent">
-          <label class="h10_em" @click="$refs.menu.modalDirection=true">
-            Dirección
-          </label>
+          <label for="model" class="h10_em"> Modelo del Vehículo </label>
+          <v-text-field id="model" v-model="store.model" solo></v-text-field>
+        </v-card>
 
-          <v-sheet color="transparent" style="cursor:pointer" @click="$refs.menu.modalDirection=true">
-            <v-text-field
-              v-model="store.address"
-              solo
-              disabled
-            ></v-text-field>
-          </v-sheet>
-        </v-card>
         <v-card color="transparent">
-          <label for="telefono" class="h10_em"> Teléfono </label>
-
-          <v-text-field id="telefono" v-model="store.phone" solo></v-text-field>
+          <label for="color" class="h10_em"> Color del Vehículo </label>
+          <v-text-field id="color" v-model="store.color" solo></v-text-field>
         </v-card>
+
         <v-card color="transparent">
-          <label for="foto" class="h10_em"> Logo de la tienda </label>
-
-          <v-file-input
-            v-model="store.logo"
-            id="foto"
-            solo
-            prepend-icon=""
-            :clearable="false"
-            class="input-file"
-            @change="ImagePreview()"
-          >
-            <template v-slot:selection>
-              <img :src="url" alt="Image selected" />
-            </template>
-          </v-file-input>
+          <label for="plaque" class="h10_em"> Placa del Vehículo </label>
+          <v-text-field id="plaque" v-model="store.plaque" solo></v-text-field>
         </v-card>
-        <v-card color="transparent" class="cardHorario" style="display:flex">
-          <aside class="divcol">
-            <label for="apertura" class="h10_em"> Horario de apertura </label>
-            <v-menu
-              ref="menu1"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="perfil.apertura"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
-            >
+
+        <v-card color="transparent" class="jstart">
+          <div class="contcheckbox divcol acenter" @click="state=!state">
+            <v-tooltip top color="var(--clr-btn)">
               <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  id="apertura"
-                  v-model="perfil.apertura"
-                  type="time" solo
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
+                <label v-on="on" v-bind="attrs" for="delivery" class="h10_em delivery"> {{state?'Activo':'Inactivo'}} </label>
               </template>
-              <v-time-picker
-                v-model="store.apertura"
-                full-width scrollable
-                @click:minute="$refs.menu1.save(store.apertura)"
-              ></v-time-picker>
-            </v-menu>
-          </aside>
+              <span class="clr_text_btn">Activar para aparecer en búsquedas</span>
+            </v-tooltip>
 
-          <aside class="divcol">
-            <label for="cierre" class="h10_em"> Horario de cierre </label>
-            <v-menu
-              ref="menu2"
-              :close-on-content-click="false"
-              :nudge-right="40"
-              :return-value.sync="perfil.cierre"
-              transition="scale-transition"
-              offset-y
-              max-width="290px"
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  id="cierre"
-                  v-model="store.cierre"
-                  type="time" solo
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-time-picker
-                v-model="store.cierre"
-                full-width scrollable
-                @click:minute="$refs.menu2.save(store.cierre)"
-              ></v-time-picker>
-            </v-menu>
-          </aside>
+            <v-btn 
+              id="delivery"
+              v-model="perfil.delivery"
+              color="var(--clr-card-2)">
+              <img  v-if="state" src="@/assets/icons/check.svg" alt="check button for delivery">
+            </v-btn>
+          </div>
         </v-card>
       </aside>
 
@@ -141,7 +77,7 @@ import Alerts from '@/components/alerts/Alerts.vue'
 import MenuForms from '../components/MenuForms.vue'
 
 export default {
-  name: "miTienda",
+  name: "miDelivery",
   components: { MenuForms, Alerts },
   data() {
     return {
@@ -152,8 +88,9 @@ export default {
       // foto: false,
       // foto2: false,
       store: {},
-      perfil: { wallet: localStorage.getItem("walletid"), direccion:null, location: null,
-        apertura: '', cierre: '' },
+      perfil: { wallet: localStorage.getItem("walletid"), direccion:null, location: null },
+      v_type: ['Automovil', 'Moto', 'Bicicleta'],
+      state: false,
     };
   },
   mounted() {
@@ -204,7 +141,6 @@ export default {
             })
             .then(() => {
               // console.log(res);
-              this.$refs.alerts.Alerts('success');
             });
         }
       } catch (e) {
@@ -227,29 +163,24 @@ export default {
           sender: wallet.account(),
         });
         if (wallet.isSignedIn()) {
-          let horario = {inicio: this.store.apertura, cierre: this.store.cierre}
+          let horario = {inicio: this.store.apertura, cierre: this.store.inicio}
           const formData = new FormData();
           formData.append("file", this.store.logo);
           await this.axios.post(IPFS, formData).then((res) => {
-            contract.set_store({
+            contract
+              .set_store({
                 owner_id: wallet.getAccountId(),
                 name: this.store.name,
-                address: "this.store.address",
-                location: "JSON.stringify(this.store.location)",
+                address: this.store.address,
                 phone: this.store.phone,
                 wallet: this.store.wallet,
-                schedule: "JSON.stringify(horario)",
+                schedule: JSON.stringify(horario),
                 logo:
                   "https://" + res.data.data + direccionIpfs + "/" + res.data.nombre,
-              }).then((res) => {
-                // console.log(res);
-                this.$refs.alerts.Alerts('success');
-                this.store.logo =
-                "https://" + res.data.data + direccionIpfs + "/" + res.data.nombre;
-                this.store.horario = horario
-                localStorage.setItem("store", JSON.stringify(this.store));
-              }
-            );
+              })
+               this.store.logo =
+              "https://" + res.data.data + direccionIpfs + "/" + res.data.nombre;
+              localStorage.setItem("store", JSON.stringify(this.store));
           });
         }
       } catch (e) {
@@ -281,4 +212,4 @@ export default {
 };
 </script>
 
-<style src="./MiTienda.scss" lang="scss" />
+<style src="./MiDelivery.scss" lang="scss" />

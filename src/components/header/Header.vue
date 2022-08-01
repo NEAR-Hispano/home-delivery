@@ -1,5 +1,7 @@
 <template>
   <section>
+    <Alerts ref="alerts"></Alerts>
+    <MenuHeader ref="menu"></MenuHeader>
     <!-- desktop -->
     <v-app-bar
       id="headerApp"
@@ -43,10 +45,13 @@
               <span v-if="item.key=='logout'">{{ item.text }}</span>
             </v-btn>
 
-            <v-btn class="botones" @click="$refs.menu.modalShopCart=true">
+            <v-btn
+              class="botones"
+              @click="verifyDataShopCart()"
+            >
               <v-badge
-                :content="messages"
-                :value="messages"
+                :content="$store.state.dataModalShopCart.length"
+                :value="$store.state.dataModalShopCart.length"
                 color="#3E2185"
               >
                 <img width="100%" src="@/assets/icons/cart.svg" alt="shopping cart">
@@ -55,14 +60,14 @@
           </aside>
         </v-col>
       </v-row>
-      <MenuHeader ref="menu"></MenuHeader>
     </v-app-bar>
   </section>
 </template>
 
 <script>
+  import Alerts from '@/components/alerts/Alerts.vue'
   import MenuHeader from './MenuHeader.vue'
-  import { PERFIL,PROFILE } from '@/services/api.js'
+  import { PERFIL,PROFILE,PENDING_ORDERS} from '@/services/api.js'
   import * as nearAPI from "near-api-js";
   import { CONFIG } from "@/services/api";
   const { connect, keyStores, WalletConnection } = nearAPI;
@@ -70,13 +75,13 @@
   export default {
     name: "header",
     i18n: require("./i18n"),
-    components: { MenuHeader },
+    components: { MenuHeader, Alerts },
     data() {
       return {
         nearid: false,
         user: null,
-        messages: 2,
         search: "",
+        intervalo: null,
         dataLogin: [
           {
             key: "login",
@@ -96,10 +101,26 @@
       if (localStorage.walletid && localStorage.walletid !== 'null') {
         this.nearid = true
       }
+      this.intervalo = setInterval(this.fetchPendingOrders_client,3000)
       // Configure button/menu by: Csar
       this.ChangeMenu(this.nearid)
     },
     methods: {
+      fetchPendingOrders_client () {
+        var id = parseInt(localStorage.getItem('profileid'))
+        this.axios.get(PENDING_ORDERS + '/?id=' + id + '&').then((res) => {
+          res.data.forEach(element => {
+            this.$store.commit('ShoppingCart', element)
+          });
+        })
+      },
+      verifyDataShopCart () {
+        if (this.$store.state.dataModalShopCart.length !== 0) {
+          this.$refs.menu.modalShopCart = true
+        } else {
+          this.$refs.alerts.Alerts('cancel', 'Sin registros', 'No hay registros disponibles')
+        }
+      },
       async loginNear(action) {
         const near = await connect(
           CONFIG(new keyStores.BrowserLocalStorageKeyStore())

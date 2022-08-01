@@ -12,6 +12,7 @@
   }
   .contdown {
     padding-inline: var(--padding-g);
+    min-height: 363px;
     .conttag {
       position: sticky;
       margin-left: -6.5%;
@@ -33,6 +34,7 @@
       grid-gap: 1em;
       @include media(max, medium) {grid-gap: 2em}
       .card {
+        width: clamp(18em, 20vw, 20em);
         height: max-content;
         gap: clamp(0.5em, 1vw, 1em);
         border-radius: $border-card;
@@ -41,7 +43,7 @@
         @include media(max, small) {margin-inline: auto}
         &:is(:hover, :focus) .images {mix-blend-mode: multiply;}
         .images {
-          width: 100%;
+          width: 100% !important;
           height: 15em;
         }
         .contcard {
@@ -152,7 +154,10 @@
             }
           }
           .customeTooltip {
-            @include absolute(var(--x), var(--y));
+            // @include absolute(var(--x), var(--y));
+            position: absolute;
+            top: var(--y);
+            left: var(--x);
             transform: translate(10px, -20px);
             background-color: $clr-btn;
             color: #FFFFFF !important;

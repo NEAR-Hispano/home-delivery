@@ -7,11 +7,13 @@
   font-size: 16px;
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
   @include fixed(0,0,auto,0);
   width: 15%;
   height: 100%;
   padding-block: clamp(2em, 3vh, 3em);
   box-shadow: $sombra-card;
+  transition: .5s $ease-return;
   .contlogo {
     width: min(90%, 10em);
     .logo {width: 100%}

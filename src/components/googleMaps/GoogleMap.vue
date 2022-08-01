@@ -12,8 +12,8 @@
       :center="UserCoordinates"
       :zoom="14"
       :options="{
-        key: 'AIzaSyB8dExdQtd6WILpKT57uF2boPp8VyCIufk',
-        mapId: '6840d2b70ceb1209',
+        key: 'AIzaSyA8ZXhuqGTzEZY25fO5eM7Xxj-rotGs3JI',
+        mapId: 'f5c4f66caa34617d',
         zoomControl: true,
         mapTypeControl: false,
         scaleControl: false,
@@ -106,7 +106,7 @@ export default {
   },
   mounted() {
     //add the map to a data object
-    // this.$refs.mapRef.$mapPromise.then(map => this.map = map);
+    this.$refs.mapRef.$mapPromise.then(map => this.map = map);
     // hide and show search
     const item = document.querySelector('.inputGoogleSearch');
     item.addEventListener('click', ()=>{item.classList.add('active')})
@@ -115,18 +115,18 @@ export default {
     });
   },
   methods: {
-    someFunction() {
-      console.log('alguna funcion')
-    },
+    // someFunction() {
+    //   console.log('alguna funcion')
+    // },
     mapClicked(mouseArgs) {
-      if (this.markerCount < 1) {this.addMarker(mouseArgs)}
+      if (this.markerCount < 1) {this.addMarker()}
       const createdMarker = this.PositionMarker[this.PositionMarker.length - 1];
       createdMarker.position.lat = mouseArgs.latLng.lat();
       createdMarker.position.lng = mouseArgs.latLng.lng();
       createdMarker.ifw2latText = mouseArgs.latLng.lat();
       createdMarker.ifw2lngText = mouseArgs.latLng.lng();
     },
-    addMarker: function addMarker(mouseArgs) {
+    addMarker: function addMarker() {
       this.markerCount++
       this.lastId++;
       this.PositionMarker.push({
@@ -136,9 +136,20 @@ export default {
         draggable: true,
         enabled: true,
         ifw: true,
-        ifw2latText: mouseArgs.latLng.lat(),
-        ifw2lngText: mouseArgs.latLng.lng(),
+        ifw2latText: 0,
+        ifw2lngText: 0,
       });
+    },
+    updatePlace(place) {
+      if (place && place.geometry && place.geometry.location) {
+        if (this.markerCount < 1) {this.addMarker()}
+         const marker = this.PositionMarker[this.PositionMarker.length - 1];
+        marker.position.lat = place.geometry.location.lat();
+        marker.position.lng = place.geometry.location.lng();
+        marker.ifw2latText = place.geometry.location.lat();
+        marker.ifw2lngText = place.geometry.location.lng();
+        this.map.setCenter(marker.position)
+      }
     },
     update(field, event) {
       if (field === 'reportedCenter') {
@@ -159,13 +170,6 @@ export default {
         this.$set(this, field, event);
       }
     },
-    updatePlace(place) {
-      if (place && place.geometry && place.geometry.location) {
-        var marker = this.addMarker();
-        marker.position.lat = place.geometry.location.lat();
-        marker.position.lng = place.geometry.location.lng();
-      }
-    }
   },
 };
 </script>

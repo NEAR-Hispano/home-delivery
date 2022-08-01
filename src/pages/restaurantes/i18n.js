@@ -15,7 +15,9 @@ module.exports = {
         filterIncluir: ["Blabla", "Algoalgo"],
       },
       // restaurante-tienda
-      direccion: "Dirección"
+      direccion: "Dirección",
+      horario: "Horario",
+      agregarCarrito: "Agregar al carrito",
     },
     US: {
       // restaurantes
@@ -32,7 +34,9 @@ module.exports = {
         filterIncluir: ["Blahblah", "Thingthing"],
       },
       // restaurante-tienda
-      direccion: "Direction"
+      direccion: "Direction",
+      horario: "Schedule",
+      agregarCarrito: "Add to cart",
     }
   }
 }

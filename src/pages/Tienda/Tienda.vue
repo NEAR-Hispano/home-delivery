@@ -1,5 +1,6 @@
 <template>
   <section id="tienda" class="parent">
+    <ModalTienda ref="menu"></ModalTienda>
     <v-col class="contup astart">
       <section class="contbanner jspace">
         <v-img
@@ -15,31 +16,66 @@
                   <v-icon class="not_clr" color="var(--clr-text-btn)">mdi-clipboard-edit</v-icon>
                 </v-btn>
               </template>
-              <span class="clr_text_btn">Editar datos de tienda</span>
+              <span class="clr_text_btn">{{$t('editarTienda')}}</span>
             </v-tooltip>
           </v-card-title>
         </v-img>
 
         <aside class="contHistorial fill">
           <div v-for="n in 19" :key="n" class="decoration" :style="`--distance:${(n+1)*4}`" />
-          <h3 class="h8_em tcenter not_clr">Historial de Ordenes</h3>
+          <h3 class="h8_em tcenter not_clr">{{$t('historialOrdenes')}}</h3>
+          <v-data-table
+            id="dataTable"
+            :headers="headersHistorial"
+            :items="dataHistorial"
+            hide-default-footer
+            :mobile-breakpoint="1060"
+          >
+            <template v-slot:[`item.id`]="{ item }">
+              <v-btn disabled icon small class="bold">
+                {{ item.id }}
+              </v-btn>
+            </template>
+
+            <template v-slot:[`item.statu`]="{ item }">
+              <v-chip :color="item.statu=='A'?'#3CD4A0':'#ff4081'">
+               <span v-if="item.statu==='R'" class="bold">{{$t('revisar')}}</span>
+               <span v-if="item.statu==='N'" class="bold">{{$t('porPagar')}}</span>
+               <span v-if="item.statu==='P'" class="bold">{{$t('preparando')}}</span>
+               <span v-if="item.statu==='C'" class="bold">{{$t('enCamino')}}</span>
+               <span v-if="item.statu==='E'" class="bold">{{$t('entregando')}}</span>
+               <span v-if="item.statu==='B'" class="bold">{{$t('recibido')}}</span>
+               <span v-if="item.statu==='X'" class="bold">{{$t('cancelado')}}</span>
+              </v-chip>
+            </template>
+            <template v-slot:[`item.actions`]="{ item }">
+              <v-tooltip bottom color="var(--clr-btn)">
+                <template v-slot:activator="{ on, attrs }">
+                <v-btn icon small v-on="on" v-bind="attrs" @click=" $refs.menu.modalTienda=true, $refs.menu.get_orders_details(item.id), $refs.menu.get_orders(item.id)">
+                  <v-icon small>mdi-eye-plus</v-icon>
+                </v-btn>
+                </template>
+                <span class="clr_text_btn tnone">{{$t('verInformaciónCompleta')}}</span>
+              </v-tooltip>
+            </template>
+          </v-data-table>
         </aside>
       </section>
     </v-col>
 
     <v-col class="contdown divcol margin2top">
-      <h2 class="h6_em center">Mi Menú
+      <h2 class="h6_em center">{{$t('miMenu')}}
         <v-tooltip right color="var(--clr-btn)">
           <template v-slot:activator="{ on, attrs }">
             <v-btn class="not_clr margin1left" icon v-bind="attrs" v-on="on" to="/mi-menu" :ripple="false">
               <v-icon size="2em" class="not_clr" color="var(--clr-btn-2)">mdi-plus-circle</v-icon>
             </v-btn>
           </template>
-          <span class="clr_text_btn">Organizar menú</span>
+          <span class="clr_text_btn">{{$t('organizarMenu')}}</span>
         </v-tooltip>
       </h2>
 
-      <aside class="contFilters divwrap acenter">
+      <!-- <aside class="contFilters divwrap acenter">
         <v-btn text class="searchBtn semibold">
           {{$t('filtrar')}}
         </v-btn>
@@ -107,7 +143,7 @@
             </span>
           </template>
         </v-select>
-      </aside>
+      </aside> -->
 
       <section class="contRestaurantList">
         <v-card v-for="(item,i) in dataMenuTienda" :key="i" class="card divcol" :style="WidthListener">
@@ -134,13 +170,15 @@
 </template>
 
 <script>
+import ModalTienda from './ModalTienda.vue';
 import * as nearAPI from "near-api-js";
-import { CONFIG } from "@/services/api";
+import { ORDER, CONFIG, ORDERD} from "@/services/api";
 const { connect, keyStores, WalletConnection, Contract, utils } = nearAPI;
 
 export default {
   name: "tienda",
   i18n: require("./i18n"),
+  components: { ModalTienda },
   data() {
     return {
       data: {},
@@ -155,17 +193,41 @@ export default {
           coordinates: { lat:9.988903846136667, lng:-67.6891094161248 }
         }
       },
-      dataMenuTienda: []
+      dataMenuTienda: [],
+      headersHistorial: [
+        { value: "id", text: "Número de orden", align: "center" },
+        { value: "client_name", text: "Nombre cliente", align: "center" },
+        { value: "statu", text: "Estado", align: "center" },
+        { value: "actions", align: "center", sortable: false },
+      ],
+      dataHistorial: [
+      ],
+      intervalo: null,
     }
   },
   mounted() {
-    this.VerifyStore()
-    this.get_menu();
+    this.initComponentOrdersShop()
   },
   computed: {
     WidthListener() {if (this.dataMenuTienda.length <= 3) {return 'max-width: 20em'}}
   },
   methods: {
+    async initComponentOrdersShop () {
+      const re_1 = await this.VerifyStore();
+      const re_2 =  await this.get_menu();
+      this.intervalo = setInterval(this.get_orders, 3000);
+    },
+    get_orders() {
+      this.axios.get(ORDER+"/?wallet_shop=" + this.data.wallet).then((response) => {
+        // console.log(response)
+        this.dataHistorial = response.data
+      })
+    },
+    get_orders_details(id) {
+        this.axios.get(ORDERD+"/?order=" + id).then(() => {
+          // console.log(response)
+        })
+    },
     formatPrice(price) {
       return utils.format.formatNearAmount(
         price.toLocaleString("fullwide", { useGrouping: false })
@@ -190,13 +252,14 @@ export default {
               user_id: wallet.getAccountId(),
             })
             .then((res) => {
-              console.log(res);
               this.dataMenuTienda = res.platillos;
+              return true
             });
         }
       } catch (e) {
         // Router
         console.log(e);
+        return false
       }
     },
     async VerifyStore() {
@@ -219,13 +282,14 @@ export default {
             })
             .then((res) => {
               this.data = res;
-              console.info(this.data);
               localStorage.setItem("store", JSON.stringify(this.data));
+              return true
             });
         }
       } catch (e) {
         // Router
         this.$router.push({ name: "miTienda" });
+        return false
       }
     },
   },

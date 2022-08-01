@@ -106,22 +106,34 @@
 // // // modal shop cart // // //
 //////////////////////////////////////////////////////////////////////
 #modalShopCart {
-  padding-top: 1em;
-  @include media(max, small) {padding-top: 2em}
+  padding-block: 1em;
+  @include media(min, small) {max-height: 700px}
+  @include media(max, small) {padding-top: calc(1em + 36px)}
+  ::-webkit-scrollbar {width: 5px}
+  :is(.primary--text, button[type].primary--text) {
+    color: $clr-btn-2 !important;
+    & :is(span, i) {color: $clr-btn-2 !important}
+    & .v-input__slot::after {
+      background: $clr-btn-2 !important;
+      border-color: $clr-btn-2 !important;
+    }
+  }
   .contentModal {
-    overflow-y: scroll;
-    min-height: 450px;
-    max-height: 550px;
-    @include media(max, small) {max-height: 80vh}
+    @include media(max, small) {max-height: 80vh;overflow-y: scroll}
     .titulo {color: $clr-btn-2 !important; font-weight: 700}
-    @include media(min, small) {grid-template-columns: 70% 1fr}
-    section.divcol  {padding:.5em; padding-right: .8em}
+    @include media(min, small) {grid-template-columns: 1fr max-content}
+    section.divcol  {margin:.5em; margin-right: .8em}
     .contInformacion {
       grid-row: span 2;
-      position: relative !important;
-      .grid {
-        grid-template-columns: repeat(2, 1fr) 30px;
-        grid-gap: 0em 1em;
+      height: 450px;
+      @include media(max, small) {height: 300px}
+      overflow-y: scroll;
+      overflow-x: hidden;
+      .fwrap {
+        display: flex;
+        flex-wrap: wrap;
+        &>*:not(.cancelBtn) {flex: 1 1 150px};
+        gap: .5em 1em;
         position: relative;
         align-items: center;
         background-color: hsl(0, 40%, 97%);
@@ -143,28 +155,31 @@
         }
       }
       span:first-child {grid-row: span 2}
-      &::after {
+    }
+    .contRightPanel {
+      padding-inline: 1em;
+      position: relative;
+      @include media(max,small){padding-bottom: 100px}
+      @include media(min, small) {
+        display: grid;
+        place-content: center;
+      }
+      &::before {
         content: "";
         background-color: #3A383F;
-        @include absolute(auto,0,0,0);
+        @include absolute(0,0,auto,0);
         width: 2px;
         height: 90%;
         @include media(max, small) {
-          @include absolute(0,auto,0,0);
+          @include absolute(0,0,0,auto);
           width: 90%;
           height: 2px;
         }
       }
-    }
-    .contRightPanel {
-      @include media(min, small) {
-        @include absolute(auto,0,0,0);
-        max-width: 30%;
-        display: grid;
-        place-content: center;
-      }
       section+section {
         position: relative !important;
+        width: 315px;
+        @include media(max, small) {width: 100%}
         &::after {
           content: "";
           @include absolute(0,0,0,auto);
@@ -172,6 +187,10 @@
           width: 90%;
           height: 2px;
         }
+      }
+      .map {
+        width: 100%;
+        height: 230px;
       }
     }
   }

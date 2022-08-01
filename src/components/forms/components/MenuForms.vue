@@ -3,7 +3,6 @@
     <v-dialog
       v-model="modalDirection"
       max-width="min(95%, 80em)"
-      scrollable
     >
       <v-card id="modalDirection">
         <GoogleMapForms ref="map"
@@ -46,6 +45,8 @@ export default {
   components: { GoogleMapForms },
   data() {
     return {
+      modalTimePicker: false,
+      picker: null,
       modalDirection: false,
       closeMenu: true,
       dataVerificators: [

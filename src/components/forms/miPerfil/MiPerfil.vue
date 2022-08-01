@@ -55,7 +55,6 @@
               v-model="perfil.direccion"
               solo
               disabled
-              hide-details
             ></v-text-field>
           </v-sheet>
         </v-card>
@@ -159,16 +158,18 @@ export default {
     },
     SaveProfile(item) {
       if (item.id){
+        item.location = JSON.stringify(item.location)
         this.axios.put(PROFILE+item.id+'/',item).then((response) => {
           this.perfil=response.data
-          this.$router.push({name:'inicio'})
-          this.$router.go()
+          this.$refs.alerts.Alerts('success');
         })
       } else {
+        item.location = JSON.stringify(item.location)
+        // console.log(item)
         this.axios.post(PROFILE,item).then((response) => {
           this.perfil=response.data
           this.$router.push({name:'inicio'})
-          this.$router.go()
+          this.$refs.alerts.Alerts('success');
         })
       }
     },

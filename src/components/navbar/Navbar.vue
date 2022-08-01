@@ -1,5 +1,5 @@
 <template>
-  <v-row id="navbar" class="alignmobile">
+  <v-row id="navbar" class="alignmobile" :style="hideNavbarOnChats">
     <!-- logo -->
     <a class="contlogo align eliminarmobile">
       <img class="logo" src="@/assets/logos/logo.svg" alt="Logo" @click="to('inicio')">
@@ -68,6 +68,11 @@ export default {
     this.VerifyProfile(localStorage.walletid)
     // navbar route verificator
     this.to(this.$router.currentRoute.name)
+  },
+  computed: {
+    hideNavbarOnChats() {
+      if (window.innerWidth<=880) {return this.$store.state.drawerChats?'transform:translateY(200px)':null}
+    },
   },
   methods: {
     VerifyProfile(user) {

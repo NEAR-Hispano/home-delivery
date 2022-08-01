@@ -5,8 +5,8 @@ import Vue from 'vue'
 // google maps
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyB8dExdQtd6WILpKT57uF2boPp8VyCIufk',
-    map_id: '6840d2b70ceb1209',
+    key: 'AIzaSyA8ZXhuqGTzEZY25fO5eM7Xxj-rotGs3JI',
+    mapId: 'f5c4f66caa34617d',
     libraries: "places",
   },
   installComponents: true

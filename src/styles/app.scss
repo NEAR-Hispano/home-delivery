@@ -51,16 +51,16 @@
 }
 
 // v-dialogs
-.v-dialog--scrollable {
-  @include media(max, small) {margin: 0 !important;max-height: 99% !important;min-height: 99% !important}
-  &>*, & > .v-card {
-    border-radius: 40px 40px 80px 80px / 150px !important;
-    border: 5px solid $clr-btn !important;
-    clip-path: $clip-path-2 !important;
-    box-shadow: $sombra-card-2 !important;
-    overflow-x: hidden !important;
-    position: relative;
-  }
+.v-dialog {
+  border-radius: 40px 40px 80px 80px / 150px !important;
+  border: 5px solid $clr-btn !important;
+  clip-path: $clip-path-2 !important;
+  box-shadow: $sombra-card-2 !important;
+  position: relative;
+  overscroll-behavior: contain;
+  &::-webkit-scrollbar {display: none}
+  // @include media(min, small) {&::-webkit-scrollbar {display: none}}
+  // @include media(max, small) {margin: 0 !important;max-height: 99% !important;min-height: 99% !important}
 }
 
 
@@ -266,6 +266,11 @@ p:not(.not_typography, .not) {
     color: var(--clr-text-btn) !important;
     font-weight: 600 !important;
     letter-spacing: -0.1ch !important;
+  }
+  &.botones2.v-btn--disabled {
+    & span {
+      color: var(--clr-btn-2) !important;
+    }
   }
 }
 .label {

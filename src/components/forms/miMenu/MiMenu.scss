@@ -124,7 +124,7 @@
           }
         }
         .controls {
-          .v-btn:nth-child(1) {
+          .v-btn.add {
             border: 1px solid $clr-text-btn;
             span {color: $success !important}
             @include media(min, 600px) {
@@ -132,7 +132,7 @@
               img {width: 1.4em}
             }
           }
-          .v-btn:last-child {
+          .v-btn:last-of-type {
             background-color: $warning !important;
             width: max-content;
             height: max-content;

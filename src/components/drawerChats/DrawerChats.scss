@@ -2,6 +2,8 @@
 
 // drawerChats
 #drawerChats {
+  overscroll-behavior: contain;
+  * {text-transform: none !important}
   .floatingButton {
     --size: 3.5em;
     position: fixed;
@@ -28,20 +30,18 @@
       width: var(--size);
       height: var(--size);
       background-color: $clr-btn;
-      .v-icon {
-        font-size: calc(var(--size) - .9em);
-      }
+      .v-icon {font-size: calc(var(--size) - .9em)}
     }
   }
   .v-navigation-drawer__content {
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     padding-block: 2em;
     .contPedidos {
       h3 {}
     }
     .vac-card-window {
       box-shadow: none !important;
+      .vac-svg-button.vac-add-icon {display: none}
     }
   }
 }

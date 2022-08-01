@@ -71,13 +71,13 @@
                 <template v-for="(n,i) in columnsRestaurant">
                   <template v-if="(+index + i) < sliderRestaurant.length">
                     <v-col class="contslides relative divcol paddlateral" :key="i">
-                      <aside class="contLike">
+                      <!-- <aside class="contLike">
                         <v-btn icon class="contimg center absolute not_clr"
                           :class="{ contIconActive: sliderRestaurant[+index + i].like }"
                           @click="sliderRestaurant[+index + i].like = !sliderRestaurant[+index + i].like">
                           <img :src="require(`@/assets/icons/corazon${sliderRestaurant[+index + i].like==true?'':'-outline'}.svg`)" alt="Food icon">
                         </v-btn>
-                      </aside>
+                      </aside> -->
 
                       <img class="images" :src="sliderRestaurant[+index + i].img" alt="Restaurant image">
 

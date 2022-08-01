@@ -4,6 +4,14 @@
 // // // tienda // // //
 //////////////////////////////////////////////////////////////////////
 #tienda {
+  :is(.primary--text, button[type].primary--text) {
+    color: $clr-btn-2 !important;
+    & :is(span, i) {color: $clr-btn-2 !important}
+    & .v-input__slot::after {
+      background: $clr-btn-2 !important;
+      border-color: $clr-btn-2 !important;
+    }
+  }
   .contup {
     --height: 350px;
     padding-top: 2em;
@@ -14,8 +22,9 @@
     .contbanner {
       width: 100%;
       display: grid;
+      grid-template-columns: 1fr;
       gap: clamp(1em, 2vw, 2em);
-      @include media(min, small) {grid-template-columns: 1fr 30%}
+      @include media(min, small) {grid-template-columns: 1fr 40%}
       .v-image {
         border-radius: $border-btn $border-btn 0 0;
         height: var(--height) !important;
@@ -51,6 +60,27 @@
         filter: $sombra-filter;
       }
       h3 {@include colorText(linear-gradient(180deg, $clr-btn 65%, black, $clr-btn)); padding-inline: 8px 20px}
+      #dataTable {
+        background-color: transparent;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        overscroll-behavior: contain;
+        height: 260px;
+        &::-webkit-scrollbar {width: 5px}
+        tbody {
+          tr {
+            &:hover {background-color: transparent}
+          }
+          td {text-transform: none}
+        }
+        .v-chip {
+          span {text-transform: capitalize !important}
+        }
+        .v-data-table__mobile-row:last-of-type {
+          display: flex;
+          justify-content: center;
+        }
+      }
     }
   }
   .contdown {
@@ -66,6 +96,7 @@
       grid-gap: 1em;
       @include media(max, medium) {grid-gap: 2em}
       .card {
+        width: 90%;
         height: max-content;
         gap: clamp(0.5em, 1vw, 1em);
         border-radius: $border-card;
@@ -121,6 +152,89 @@
             .price {color: mix($clr-label, #000000) !important}
           }
         }
+      }
+    }
+  }
+}
+
+#modalTienda {
+  padding-block: 1em;
+  @include media(max, small) {padding-top: calc(1em + 36px)}
+  ::-webkit-scrollbar {width: 5px}
+  :is(.primary--text, button[type].primary--text) {
+    color: $clr-btn-2 !important;
+    & :is(span, i) {color: $clr-btn-2 !important}
+    & .v-input__slot::after {
+      background: $clr-btn-2 !important;
+      border-color: $clr-btn-2 !important;
+    }
+  }
+  .contentModal {
+    @include media(max, small) {max-height: 80vh;overflow-y: scroll}
+    .titulo {color: $clr-btn-2 !important; font-weight: 700}
+    @include media(min, small) {grid-template-columns: 1fr max-content}
+    section.divcol  {padding:.5em; margin-right: .8em}
+    .contInformacion {
+      grid-row: span 2;
+      height: 400px;
+      @include media(max, small) {height: 300px}
+      overflow-y: scroll;
+      overflow-x: hidden;
+      .fwrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5em 1em;
+        position: relative;
+        align-items: center;
+        background-color: hsl(0, 40%, 97%);
+        border-radius: $border-btn;
+        padding: .2em;
+        &>* {flex: 1 1}
+        &::before {
+          content: var(--numeration);
+          color: $clr-btn;
+          font-weight: 800;
+          @include absolute(-24px, 50%);
+          transform: translateY(-50%);
+        }
+      }
+      span:first-child {grid-row: span 2}
+    }
+    .contRightPanel {
+      padding-inline: 1em;
+      position: relative;
+      @include media(max,small){padding-bottom: 50px}
+      @include media(min, small) {
+        display: grid;
+        place-content: center;
+      }
+      &::before {
+        content: "";
+        background-color: #3A383F;
+        @include absolute(0,0,auto,0);
+        width: 2px;
+        height: 90%;
+        @include media(max, small) {
+          @include absolute(0,0,0,auto);
+          width: 90%;
+          height: 2px;
+        }
+      }
+      section+section {
+        width: 315px;
+        @include media(max, small) {width: 100%}
+        position: relative !important;
+        &::after {
+          content: "";
+          @include absolute(0,0,0,auto);
+          background-color: #3A383F;
+          width: 90%;
+          height: 2px;
+        }
+      }
+      .map {
+        width: 100%;
+        height: 230px;
       }
     }
   }

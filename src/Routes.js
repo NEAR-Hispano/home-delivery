@@ -17,12 +17,6 @@ export default new Router({
   routes: [
     // path 1
     {
-      path: '/register',
-      name: 'register',
-      component: () => import('@/layouts/register/Register'),
-    },
-    // path 2
-    {
       path: '/',
       name: 'layout',
       component: () => import('@/layouts/layout/Layout'),
@@ -47,6 +41,11 @@ export default new Router({
         //   name: 'miTienda',
         //   component: () => import('@/components/forms/miTienda/MiTienda'),
         // },
+        {
+          path: '/mi-delivery',
+          name: 'miDelivery',
+          component: () => import('@/components/forms/miDelivery/MiDelivery'),
+        },
         // {
         //   path: '/',
         //   name: 'inicio',
@@ -74,8 +73,6 @@ export default new Router({
         },
       ],
     },
-    // Here next path if need
-    
     // Last path (Errors)
     {
       path: '*',

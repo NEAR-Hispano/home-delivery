@@ -23,7 +23,7 @@
         gap: 1em;
       }
       .v-card {
-        label {
+        label:not(.delivery) {
           margin-left: 2ch;
         }
         // input {}
@@ -35,7 +35,11 @@
           }
         }
         .contcheckbox {
+          margin-left: 2ch;
           height: 3em;
+          @include media(max, small) {
+            margin-bottom: 2em;
+          }
           .v-btn {
             width: 2.5em;
             height: 100%;
